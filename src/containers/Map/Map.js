@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import GoogleMapsContainer from './GoogleMapsContainer';
 
 const styles = {
@@ -22,7 +16,7 @@ const styles = {
   selectImageButton: {
     marginBottom: 30,
   },
-  SheltersPageTitle: {
+  MapPageTitle: {
     textAlign: 'center',
   },
 };
@@ -35,7 +29,7 @@ class Map extends Component {
 			<div className="page">
         <Grid container spacing={16} className={classes.mapContainer}>
 					<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
-					  <Typography variant="headline" gutterBottom className={classes.SheltersPageTitle}>
+					  <Typography variant="headline" gutterBottom className={classes.MapPageTitle}>
               Map
             </Typography>
             {/* <TextField
