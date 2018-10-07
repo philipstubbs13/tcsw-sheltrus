@@ -24,6 +24,7 @@ const styles = {
 
 function NavBar(props) {
   const { classes } = props;
+	const {handleLogout} = props;
   return (
     <div className={classes.root}>
       <AppBar position="static" className="app-bar">
@@ -31,7 +32,7 @@ function NavBar(props) {
           <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/profile">
             Sheltr
           </Typography>
-          <Button color="inherit" component={Link} to="/">Logout</Button>
+          <Button color="inherit" onClick={handleLogout} component={Link} to="/">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>

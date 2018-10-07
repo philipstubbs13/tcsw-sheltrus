@@ -43,7 +43,6 @@ class Profile extends Component {
 
 		return (
 			<div>
-				<NavBar />
 				<Tabs />
 				<div className="page">
 					<Grid container direction="column" justify="center" spacing={16} className="page-container">

@@ -30,7 +30,6 @@ class Map extends Component {
 
 		return (
 			<div>
-				<NavBar />
 				<Tabs />
 				<div className="page">
 					<Grid container spacing={16} className={classes.mapContainer}>

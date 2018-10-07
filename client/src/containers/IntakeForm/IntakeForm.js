@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import third-party routing library (react-router-dom)
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -29,7 +31,6 @@ class IntakeForm extends Component {
 
 		return (
 			<div>
-				<NavBar />
 				<Tabs />
 				<div className="page">
 					<Grid container spacing={16} >
@@ -38,7 +39,7 @@ class IntakeForm extends Component {
 								Click SUBMIT to book your bed now.
 							</Typography>
 							<br />
-							<Button variant="contained" color="primary" className='book-bed-submit-button' fullWidth>
+							<Button variant="contained" color="primary" className='book-bed-submit-button' fullWidth component={Link} to ="/">
 								Submit
 							</Button>
 						</Grid>

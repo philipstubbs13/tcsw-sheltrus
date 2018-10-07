@@ -37,7 +37,6 @@ class Shelters extends Component {
 
 		return (
 			<div>
-				<NavBar />
 				<Tabs />
 				<div className="page">
 					<Grid container justify="center" spacing={16} className="{classes.profileContainer}">

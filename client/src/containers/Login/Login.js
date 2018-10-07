@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import third-party routing library (react-router-dom)
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -32,17 +34,32 @@ const styles = {
     padding: 20,
   },
   placeToStay: {
-    marginTop: 15,
+    marginTop: 5,
 
   },
   loginPageTitle: {
     textAlign: 'center',
   },
+	loginPageInfo: {
+		textAlign: 'center',
+		fontSize: 20,
+	},
 };
 
 class Login extends Component {
+	onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: '',
+			password: '',
+		}
+	}
+
   render() {
     const { classes } = this.props;
+		const { username, password } = this.state;
 
 		return (
 			<div>
@@ -53,29 +70,39 @@ class Login extends Component {
 							<Typography variant="display3" gutterBottom className={classes.loginPageTitle}>
 								Sheltr
 							</Typography>
+							<Typography component="h4" className={classes.loginPageInfo}>
+							Find or check in at a nearby homeless shelter.
+							</Typography>
+							<Typography component="h4" className={classes.loginPageInfo}>
+							Enter your username and password to LOGIN.
+							</Typography>
 							<br />
 							<TextField
-								id="outlined-full-width"
+								id="login-username"
 								className={classes.textField}
 								label="Username"
 								style={{ margin: 8 }}
 								fullWidth
 								margin="normal"
-								value=""
+								name="username"
+								value={username}
 								variant="outlined"
+								onChange={this.onChange}
 								InputLabelProps={{
 									shrink: true,
 								}}
 							/>
 							<TextField
-								id="outlined-full-width"
+								id="login-password"
 								className={classes.textField}
 								label="Password"
 								style={{ margin: 8 }}
 								fullWidth
+								name="password"
 								type="password"
 								margin="normal"
-								value=""
+								onChange={this.onChange}
+								value={password}
 								variant="outlined"
 								InputLabelProps={{
 									shrink: true,
