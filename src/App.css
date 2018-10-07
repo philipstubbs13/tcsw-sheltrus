@@ -1,0 +1,8 @@
+.page {
+  margin: 30px;
+}
+
+.page-container {
+  display: flex;
+  align-items: center !important;
+}
