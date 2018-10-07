@@ -61,7 +61,7 @@ class Ticket extends Component {
 				<div className="page">
 					<Grid container direction="column" justify="center" spacing={16} className="page-container">
 						<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
-								If you have a smart phone, SCAN to check into shelter
+								Have a smart phone? SCAN to check into shelter
 						</Typography>
 						<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
 								No smart phone? CALL (952) 960-5416
