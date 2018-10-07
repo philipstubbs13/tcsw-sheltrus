@@ -4,14 +4,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+// import css
+import './IntakeForm.css';
 
 const styles = theme => ({
 	btnText: {
 		marginLeft: 10,
 	},
-  needPlaceButton: {
-    padding: 20,
-  },
   textField: {
     maxWidth: '100%',
   },
@@ -23,13 +22,13 @@ class IntakeForm extends Component {
 
 		return (
 			<div className="page">
-        <Grid container spacing={16} className="page-container">
+        <Grid container spacing={16}>
 					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
             <Typography variant="headline">
               Click SUBMIT to book your bed now.
             </Typography>
             <br />
-						<Button variant="contained" color="primary" className={classes.bookBedSumitButton} fullWidth>
+						<Button variant="contained" color="primary" className='book-bed-submit-button' fullWidth>
               Submit
             </Button>
 					</Grid>

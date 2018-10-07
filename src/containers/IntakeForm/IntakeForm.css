@@ -1,0 +1,5 @@
+.book-bed-submit-button:hover {
+  background-color: transparent !important;
+  color: black;
+  border: 1px solid black;
+}

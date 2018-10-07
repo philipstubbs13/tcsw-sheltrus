@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+// import CSS
+import './Login.css';
 
 const styles = {
 	profileInfo: {
@@ -28,11 +30,8 @@ const styles = {
     padding: 20,
   },
   placeToStay: {
-    marginTop: 30,
+    marginTop: 15,
 
-  },
-  loginButton: {
-    marginBottom: 30,
   },
   loginPageTitle: {
     textAlign: 'center',
@@ -45,10 +44,10 @@ class Login extends Component {
 
 		return (
 			<div className="page">
-        <Grid container spacing={16} className="page-container">
-					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+        <Grid container direction="column" justify="center" spacing={16} className="page-container">
+					<Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
             <Typography variant="display3" gutterBottom className={classes.loginPageTitle}>
-              SheltrUs
+              ShelterUs
             </Typography>
             <br />
             <TextField
@@ -79,8 +78,8 @@ class Login extends Component {
               }}
             />
 					</Grid>
-					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-            <Button variant="contained" color="primary" className={classes.LoginButton} fullWidth>
+					<Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
+            <Button variant="contained" color="primary" className="login-button" fullWidth>
               Login
             </Button>
           </Grid>

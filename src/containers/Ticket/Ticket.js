@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import profilePhoto from '../Profile/profile.png';
 import qrCode from '../Ticket/qrcode.png';
 import Typography from '@material-ui/core/Typography';
+// import App css file
+import '../../App.css';
 
 const styles = {
 	profileInfo: {
@@ -51,10 +53,10 @@ class Ticket extends Component {
 
 		return (
 			<div className="page">
-        <Grid container justify="center" spacing={16} className={classes.profileContainer}>
-					<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
+        <Grid container direction="column" justify="center" spacing={16} className="page-container">
+					<Grid item direction="column" justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
 					  <Typography variant="headline" gutterBottom className={classes.loginPageTitle}>
-              Scan to check into shelter
+              If you have a smart phone, scan to check into shelter
             </Typography>
 						<img
               src={qrCode}

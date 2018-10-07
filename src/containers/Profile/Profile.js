@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+// import third-party routing library (react-router-dom)
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import profilePhoto from './profile.png';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+// import css
+import '../../App.css';
+import './Profile.css';
 
 const styles = {
 	profileInfo: {
@@ -24,16 +29,8 @@ const styles = {
 	textField: {
 		marginTop: 40,
 	},
-  needPlaceButton: {
-    padding: 20,
-  },
   placeToStay: {
     marginTop: 30,
-    alignSelf: 'flex-center',
-
-  },
-  selectImageButton: {
-    marginBottom: 30,
   },
 };
 
@@ -43,33 +40,35 @@ class Profile extends Component {
 
 		return (
 			<div className="page">
-        <Grid container justify="center" spacing={16} className={classes.profileContainer}>
-					<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
+        <Grid container direction="column" justify="center" spacing={16} className="page-container">
+					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
 						<img
               src={profilePhoto}
               alt="profile pic"
               className={classes.profilePic}
             />
             <br />
-            <Button variant="contained" color="primary" className={classes.selectImageButton}>
+            <Button fullWidth variant="contained" color="primary" className="select-image-button">
               Select image
             </Button>
+						<br />
             <TextField
               id="outlined-full-width"
               className={classes.textField}
               label="Name"
-              style={{ margin: 8 }}
               fullWidth
               margin="normal"
-              value="John Smith"
+              value="Josh Okogie"
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
+								readOnly: true,
               }}
+							disabled
             />
 					</Grid>
 					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-            <Button variant="contained" color="primary" className={classes.needPlaceButton} fullWidth>
+            <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
               I need a place to stay
             </Button>
           </Grid>

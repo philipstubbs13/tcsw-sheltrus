@@ -2,3 +2,12 @@
   margin: 30px;
 }
 
+.page-container {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+a {
+  text-decoration: none;
+}

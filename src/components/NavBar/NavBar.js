@@ -1,4 +1,6 @@
 import React from 'react';
+// import third-party routing library (react-router-dom)
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,10 +32,10 @@ function NavBar(props) {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.grow}>
-            SheltrUs
+          <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/profile">
+            ShelterUs
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
