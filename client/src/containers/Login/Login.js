@@ -51,7 +51,7 @@ class Login extends Component {
 					<Grid container direction="column" justify="center" spacing={16} className="page-container">
 						<Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
 							<Typography variant="display3" gutterBottom className={classes.loginPageTitle}>
-								ShelterUs
+								Sheltr
 							</Typography>
 							<br />
 							<TextField

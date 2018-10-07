@@ -1,0 +1,17 @@
+<svg width="113.38583" height="113.38583" xmlns="http://www.w3.org/2000/svg">
+
+ <metadata id="metadata7">image/svg+xml</metadata>
+ <g>
+  <title>background</title>
+  <rect fill="#007fff" id="canvas_background" height="115.38583" width="115.38583" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="layer1">
+   <path fill="none" fill-rule="evenodd" stroke="#000000" stroke-width="2" stroke-miterlimit="4" id="path4138" d="m0,92.385821l114.00001,0"/>
+   <rect fill="#000000" fill-rule="nonzero" stroke-width="2" stroke-linecap="square" stroke-miterlimit="4" y="12.385741" x="34.500004" height="80.000008" width="45.000004" id="rect4136-8"/>
+   <path fill="#ffffff" fill-rule="nonzero" stroke="#000000" stroke-width="1.821642" stroke-linecap="square" stroke-miterlimit="4" id="rect4136" d="m54.91082,28.965441l23.59151,-14.92093l0,77.76181l-23.59151,14.9209l0,-77.76178z"/>
+  </g>
+  <text font-weight="bold" transform="rotate(-90 63.53125000000001,61.94779205322266) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_1" y="70.13021" x="30.859663" stroke-width="0" stroke="#000" fill="#000000">sheltr</text>
+ </g>
+</svg>

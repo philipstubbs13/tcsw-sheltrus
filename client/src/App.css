@@ -12,3 +12,18 @@
 a {
   text-decoration: none;
 }
+
+.page {
+	margin: 2rem;
+	min-height: calc(100vh - 40px);
+	margin-top: 4rem;
+}
+
+#app-logo {
+	margin-right: 5px;
+	height: 80px;
+}
+
+.app-bar {
+	background-color: #007fff !important;
+}

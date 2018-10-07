@@ -10,6 +10,8 @@ import Help from './containers/Help';
 import Login from './containers/Login';
 import IntakeForm from './containers/IntakeForm';
 import Ticket from './containers/Ticket';
+// import Footer component
+import Footer from './components/Footer';
 
 // Import top level css file for app
 import './App.css';
@@ -29,6 +31,7 @@ class App extends Component {
 							<Route exact path="/ticket" component={Ticket} />
 							<Route exact path="/map" component={Map} />
             </Switch>
+					<Footer />
           </div>
         </BrowserRouter>
       </div>

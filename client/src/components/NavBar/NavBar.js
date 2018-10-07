@@ -26,10 +26,10 @@ function NavBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className="app-bar">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/profile">
-            ShelterUs
+            Sheltr
           </Typography>
           <Button color="inherit" component={Link} to="/">Logout</Button>
         </Toolbar>
