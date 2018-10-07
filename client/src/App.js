@@ -145,11 +145,35 @@ class App extends Component {
 							<div>
 								<NavBar handleLogout={this.logout}/>
 								<Switch>
-									<Route exact path="/" component={Profile} />
+									<Route
+										exact
+										path="/"
+										render={props => (
+											<Profile
+												{...props}
+												name={user.displayName}
+												email={user.email}
+												photo={user.photoURL}
+												uid={user.uid}
+											/>
+										)}
+									/>
 									<Route exact path="/help" component={Help} />
 									<Route exact path="/shelters" component={Shelters} />
 									<Route exact path="/form" component={IntakeForm} />
-									<Route exact path="/ticket" component={Ticket} />
+									<Route
+										exact
+										path="/ticket"
+										render={props => (
+											<Ticket
+												{...props}
+												name={user.displayName}
+												email={user.email}
+												photo={user.photoURL}
+												uid={user.uid}
+											/>
+										)}
+									/>
 									<Route exact path="/map" component={Map} />
 								</Switch>
 							</div>
@@ -164,7 +188,7 @@ class App extends Component {
 												Sheltr
 											</Typography>
 											<Typography component="h4" className={classes.loginPageInfo}>
-											Find or check in at a nearby homeless shelter.
+											Find or check in at a nearby shelter.
 											</Typography>
 											<Typography component="h4" className={classes.loginPageInfo}>
 											Enter your username and password to LOGIN.

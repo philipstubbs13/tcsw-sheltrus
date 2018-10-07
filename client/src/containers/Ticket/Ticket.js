@@ -53,7 +53,7 @@ const styles = {
 
 class Ticket extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, photo } = this.props;
 
 		return (
 			<div>
@@ -76,7 +76,7 @@ class Ticket extends Component {
 						</Grid>
 						<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
 							<img
-								src={profilePhoto}
+								src={photo}
 								alt="profile pic"
 								className={classes.profilePic}
 							/>

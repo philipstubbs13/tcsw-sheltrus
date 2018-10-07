@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Logo from '../../sheltr-b2.svg';
 
 const styles = {
   root: {
@@ -29,7 +30,8 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static" className="app-bar">
         <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/profile">
+					<img src={Logo} alt="Sheltr app logo" id="app-logo"></img>
+          <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/">
             Sheltr
           </Typography>
           <Button color="inherit" onClick={handleLogout} component={Link} to="/">Logout</Button>
