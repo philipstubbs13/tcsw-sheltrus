@@ -1,0 +1,24 @@
+{
+  "name": "tcsw-sheltrus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philipstubbs13/tcsw-sheltrus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philipstubbs13/tcsw-sheltrus/issues"
+  },
+  "homepage": "https://github.com/philipstubbs13/tcsw-sheltrus#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "twilio": "^3.22.0"
+  }
+}

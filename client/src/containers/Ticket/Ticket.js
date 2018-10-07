@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import profilePhoto from '../Profile/profile.png';
 import qrCode from '../Ticket/qrcode.png';
 import Typography from '@material-ui/core/Typography';
+// Import navbar component
+import NavBar from '../../components/NavBar';
+import Tabs from '../../components/Tabs';
 // import App css file
 import '../../App.css';
 
@@ -53,27 +56,34 @@ class Ticket extends Component {
     const { classes } = this.props;
 
 		return (
-			<div className="page">
-        <Grid container direction="column" justify="center" spacing={16} className="page-container">
-					<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
-              If you have a smart phone, SCAN to check into shelter
-            </Typography>
-					<Grid item  xs={12} sm={12} md={6} className={classes.placeToStay}>
-						<img
-              src={qrCode}
-              alt="qr code"
-              className={classes.qrCode}
-            />
-            <br />
-					</Grid>
-					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-						<img
-              src={profilePhoto}
-              alt="profile pic"
-              className={classes.profilePic}
-            />
-          </Grid>
-        </Grid>		
+			<div>
+				<NavBar />
+				<Tabs />
+				<div className="page">
+					<Grid container direction="column" justify="center" spacing={16} className="page-container">
+						<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
+								If you have a smart phone, SCAN to check into shelter
+						</Typography>
+						<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
+								No smart phone? CALL (952) 960-5416
+						</Typography>
+						<Grid item  xs={12} sm={12} md={6} className={classes.placeToStay}>
+							<img
+								src={qrCode}
+								alt="qr code"
+								className={classes.qrCode}
+							/>
+							<br />
+						</Grid>
+						<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+							<img
+								src={profilePhoto}
+								alt="profile pic"
+								className={classes.profilePic}
+							/>
+						</Grid>
+					</Grid>		
+				</div>
 			</div>
 		)
 	}
