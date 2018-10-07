@@ -38,13 +38,14 @@ const styles = {
     padding: 20,
   },
   placeToStay: {
-    marginTop: 30,
+    marginTop: 10,
     alignSelf: 'flex-center',
 
   },
-  selectImageButton: {
-    marginBottom: 30,
-  },
+	checkInPageTitle: {
+		textAlign: 'center',
+		marginTop: 30,
+	},
 };
 
 class Ticket extends Component {
@@ -54,10 +55,10 @@ class Ticket extends Component {
 		return (
 			<div className="page">
         <Grid container direction="column" justify="center" spacing={16} className="page-container">
-					<Grid item direction="column" justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
-					  <Typography variant="headline" gutterBottom className={classes.loginPageTitle}>
+					<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
               If you have a smart phone, scan to check into shelter
             </Typography>
+					<Grid item  xs={12} sm={12} md={6} className={classes.placeToStay}>
 						<img
               src={qrCode}
               alt="qr code"
