@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import profilePhoto from './profile.png';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 // import css
 import '../../App.css';
 import './Profile.css';
@@ -30,7 +31,7 @@ const styles = {
 		marginTop: 40,
 	},
   placeToStay: {
-    marginTop: 30,
+    marginTop: 10,
   },
 };
 
@@ -42,6 +43,9 @@ class Profile extends Component {
 			<div className="page">
         <Grid container direction="column" justify="center" spacing={16} className="page-container">
 					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+						<Typography variant="display3">Josh Smith</Typography>
+          </Grid>
+					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
 						<img
               src={profilePhoto}
               alt="profile pic"
@@ -52,26 +56,10 @@ class Profile extends Component {
               Select image
             </Button>
 						<br />
-            <TextField
-              id="outlined-full-width"
-              className={classes.textField}
-              label="Name"
-              fullWidth
-              margin="normal"
-              value="Josh Okogie"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-								readOnly: true,
-              }}
-							disabled
-            />
-					</Grid>
-					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-            <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
+						<Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
               I need a place to stay
             </Button>
-          </Grid>
+					</Grid>
         </Grid>		
 			</div>
 		)

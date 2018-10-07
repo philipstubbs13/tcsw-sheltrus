@@ -56,7 +56,7 @@ class Ticket extends Component {
 			<div className="page">
         <Grid container direction="column" justify="center" spacing={16} className="page-container">
 					<Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
-              If you have a smart phone, scan to check into shelter
+              If you have a smart phone, SCAN to check into shelter
             </Typography>
 					<Grid item  xs={12} sm={12} md={6} className={classes.placeToStay}>
 						<img

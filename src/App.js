@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // Import pages
 import Profile from './containers/Profile';
 import Shelters from './containers/Shelters';
-import Directions from './containers/Directions';
+import Map from './containers/Map';
 import Help from './containers/Help';
 import Login from './containers/Login';
 import IntakeForm from './containers/IntakeForm';
@@ -32,6 +32,7 @@ class App extends Component {
               <Route exact path="/form" component={IntakeForm} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/ticket" component={Ticket} />
+							<Route exact path="/map" component={Map} />
             </Switch>
           </div>
         </BrowserRouter>

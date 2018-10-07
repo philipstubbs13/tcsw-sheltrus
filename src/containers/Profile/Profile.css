@@ -1,5 +1,6 @@
 .need-place-button {
   padding: 1rem !important;
+	margin-top: 0px !important;
 }
 
 .need-place-button:hover, .select-image-button:hover {

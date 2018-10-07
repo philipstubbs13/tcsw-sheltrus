@@ -32,7 +32,7 @@ class Shelters extends Component {
 
 		return (
 			<div className="page">
-        <Grid container justify="center" spacing={16} className={classes.profileContainer}>
+        <Grid container justify="center" spacing={16} className="{classes.profileContainer}">
 					<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
 					  <Typography variant="headline" gutterBottom className={classes.SheltersPageTitle}>
               Find a shelter

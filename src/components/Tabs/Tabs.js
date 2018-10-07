@@ -30,8 +30,8 @@ class Tabs extends React.Component {
         <BottomNavigationAction label="My profile" value="recents" icon={<i className="fas fa-user-circle fa-2x"></i>} component={Link} to=
         "/profile"/>
         <BottomNavigationAction label="Book a bed" value="favorites" icon={<i className="fas fa-bed fa-2x"></i>} component={Link} to="/shelters"/>
-        <BottomNavigationAction label="Check in" value="nearby" icon={<i className="fas fa-map-marker-alt fa-2x"></i>} component={Link} to="/ticket" />
-        <BottomNavigationAction label="Resources" value="nearby" icon={<i className="fas fa-bars fa-2x"></i>} component={Link} to="/" />
+        <BottomNavigationAction label="Check in" value="nearby" icon={<i className="fas fa-qrcode fa-2x"></i>} component={Link} to="/ticket" />
+        <BottomNavigationAction label="Map" value="nearby" icon={<i className="fas fa-map-marker-alt fa-2x"></i>} component={Link} to="/map" />
       </BottomNavigation>
     );
   }
