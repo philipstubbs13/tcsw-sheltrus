@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import profilePhoto from './profile.png';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import profilePhoto from '../Profile/profile.png';
+import qrCode from '../Ticket/qrcode.png';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	profileInfo: {
@@ -17,6 +17,14 @@ const styles = {
 		borderColor: 'black',
 		borderStyle: 'solid',
 		borderWidth: 3,
+	},
+	qrCode: {
+		maxWidth: '100%',
+		width: '200px',
+		height: '200px',
+		borderColor: 'black',
+		borderStyle: 'solid',
+		borderWidth: 2,
 	},
 	btnText: {
 		marginLeft: 10,
@@ -37,7 +45,7 @@ const styles = {
   },
 };
 
-class Profile extends Component {
+class Ticket extends Component {
   render() {
     const { classes } = this.props;
 
@@ -45,33 +53,22 @@ class Profile extends Component {
 			<div className="page">
         <Grid container justify="center" spacing={16} className={classes.profileContainer}>
 					<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
+					  <Typography variant="headline" gutterBottom className={classes.loginPageTitle}>
+              Scan to check into shelter
+            </Typography>
+						<img
+              src={qrCode}
+              alt="qr code"
+              className={classes.qrCode}
+            />
+            <br />
+					</Grid>
+					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
 						<img
               src={profilePhoto}
               alt="profile pic"
               className={classes.profilePic}
             />
-            <br />
-            <Button variant="contained" color="primary" className={classes.selectImageButton}>
-              Select image
-            </Button>
-            <TextField
-              id="outlined-full-width"
-              className={classes.textField}
-              label="Name"
-              style={{ margin: 8 }}
-              fullWidth
-              margin="normal"
-              value="John Smith"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-					</Grid>
-					<Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-            <Button variant="contained" color="primary" className={classes.needPlaceButton} fullWidth>
-              I need a place to stay
-            </Button>
           </Grid>
         </Grid>		
 			</div>
@@ -79,4 +76,4 @@ class Profile extends Component {
 	}
 }
 
-export default withStyles(styles)(Profile);
+export default withStyles(styles)(Ticket);

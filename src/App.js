@@ -9,6 +9,7 @@ import Directions from './containers/Directions';
 import Help from './containers/Help';
 import Login from './containers/Login';
 import IntakeForm from './containers/IntakeForm';
+import Ticket from './containers/Ticket';
 // Import navbar component
 import NavBar from './components/NavBar';
 
@@ -27,6 +28,8 @@ class App extends Component {
               <Route exact path="/help" component={Help} />
               <Route exact path="/shelters" component={Shelters} />
               <Route exact path="/form" component={IntakeForm} />
+							<Route exact path="/login" component={Login} />
+							<Route exact path="/ticket" component={Ticket} />
             </Switch>
           </div>
         </BrowserRouter>
