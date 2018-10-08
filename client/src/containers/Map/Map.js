@@ -1,23 +1,21 @@
+// Global Import of React
 import React, { Component } from 'react';
+// import prop types
+import PropTypes from 'prop-types';
+// Import Material UI components and styling
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+// Import Google Maps component
 import GoogleMapsContainer from './GoogleMapsContainer';
-// Import navbar component
-import NavBar from '../../components/NavBar';
+// Import tabs component
 import Tabs from '../../components/Tabs';
 
+// CSS in JS
 const styles = {
-	btnText: {
-		marginLeft: 10,
-	},
   placeToStay: {
     marginTop: 10,
     alignSelf: 'flex-center',
-
-  },
-  selectImageButton: {
-    marginBottom: 30,
   },
   MapPageTitle: {
     textAlign: 'center',
@@ -26,36 +24,31 @@ const styles = {
 
 class Map extends Component {
   render() {
+    // ES6 destructuring
     const { classes } = this.props;
 
-		return (
-			<div>
-				<Tabs />
-				<div className="page">
-					<Grid container spacing={16} className={classes.mapContainer}>
-						<Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
-							<Typography variant="headline" gutterBottom className={classes.MapPageTitle}>
-								Map
-							</Typography>
-							{/* <TextField
-								id="outlined-full-width"
-								label="Search"
-								style={{ marginTop: 10 }}
-								placeholder="Search for a place to stay..."
-								fullWidth
-								margin="normal"
-								variant="outlined"
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/> */}
-							<GoogleMapsContainer />
-						</Grid>
-					</Grid>		
-				</div>
-			</div>
-		)
-	}
+    return (
+      <div>
+        <Tabs />
+        <div className="page">
+          <Grid container spacing={16} className={classes.mapContainer}>
+            <Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
+              <Typography variant="headline" gutterBottom className={classes.MapPageTitle}>
+                Map
+              </Typography>
+              <GoogleMapsContainer />
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    );
+  }
 }
 
+// Check prop types
+Map.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+// Export component
 export default withStyles(styles)(Map);

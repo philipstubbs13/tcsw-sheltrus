@@ -1,21 +1,19 @@
+// Global Import of React
 import React, { Component } from 'react';
 // import third-party routing library (react-router-dom)
 import { Link } from 'react-router-dom';
+// Import Material UI components and styling
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-// Import navbar component
-import NavBar from '../../components/NavBar';
+// Import Tabs component
 import Tabs from '../../components/Tabs';
 // import css
 import './IntakeForm.css';
 
 const styles = theme => ({
-	btnText: {
-		marginLeft: 10,
-	},
   textField: {
     maxWidth: '100%',
   },

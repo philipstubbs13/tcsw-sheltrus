@@ -1,6 +1,7 @@
 import React from 'react';
 // import third-party routing library (react-router-dom)
 import { Link } from 'react-router-dom';
+// import prop types
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
