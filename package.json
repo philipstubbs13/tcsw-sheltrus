@@ -19,6 +19,7 @@
   "homepage": "https://github.com/philipstubbs13/tcsw-sheltrus#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "prop-types": "^15.6.2",
     "twilio": "^3.22.0"
   }
 }

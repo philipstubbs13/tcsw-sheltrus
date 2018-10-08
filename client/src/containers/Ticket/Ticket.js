@@ -1,14 +1,13 @@
+// Global Import of React
 import React, { Component } from 'react';
+// Import Material UI components and styling
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import profilePhoto from '../Profile/profile.png';
-import qrCode from '../Ticket/qrcode.png';
 import Typography from '@material-ui/core/Typography';
-// Import navbar component
-import NavBar from '../../components/NavBar';
+// Import qrcode placeholder
+import qrCode from './qrcode.png';
+// Import Tabs component
 import Tabs from '../../components/Tabs';
-// import App css file
-import '../../App.css';
 
 const styles = {
 	profileInfo: {

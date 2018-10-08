@@ -7,12 +7,12 @@ import 'firebase/auth';
 
 
 const config = {
-	apiKey: "AIzaSyAg4ibnnKA86F7OZ3jXHx5AEYkTXICYiQs",
-	authDomain: "tcsw-homeless.firebaseapp.com",
-	databaseURL: "https://tcsw-homeless.firebaseio.com",
-	projectId: "tcsw-homeless",
-	storageBucket: "tcsw-homeless.appspot.com",
-	messagingSenderId: "660064181470"
+  apiKey: 'AIzaSyAg4ibnnKA86F7OZ3jXHx5AEYkTXICYiQs',
+  authDomain: 'tcsw-homeless.firebaseapp.com',
+  databaseURL: 'https://tcsw-homeless.firebaseio.com',
+  projectId: 'tcsw-homeless',
+  storageBucket: 'tcsw-homeless.appspot.com',
+  messagingSenderId: '660064181470',
 };
 
 firebase.initializeApp(config);
