@@ -31,9 +31,26 @@ const styles = {
   },
 };
 
+const API = 'https://gis.hennepin.us/arcgis/rest/services/HennepinData/PLACES/MapServer/8/query?where=1%3D1&outFields=*&outSR=4326&f=json';
+
 class Shelters extends Component {
+  constructor() {
+    super();
+    this.state = {
+      shelters: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch(API)
+      .then(response => response.json())
+      .then(data => this.setState({ shelters: data.features }));
+    // console.log(this.state.shelters);
+  }
+
   render() {
     const { classes } = this.props;
+    const { shelters } = this.state;
     return (
       <div>
         <Tabs />
@@ -66,70 +83,19 @@ class Shelters extends Component {
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <List>
-                <ListItem>
-                  <ListItemText primary="People Serving People" secondary="614 3rd St S, Minneapolis, MN 55415" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="St. Anne's Place" secondary="2634 Russell Ave N, Minneapolis, MN 55411" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Simpson Emergency Shelter" secondary="2740 1st Ave S, Minneapolis, MN 55408" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Mary's Place" secondary="401 7th St N, Minneapolis, MN 55405" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="St. Stephen's Emergency Shelter" secondary="2211 Clinton Ave S, Minneapolis, MN 55404" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Salvation Army - Harbor Light" secondary="1010 Currie Ave N, Minneapolis, MN 55403" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Our Savior's Shelter" secondary="2219 Chicago Ave S, Minneapolis, MN 55404" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Avenues for Homeless Youth" secondary="7210 76th Ave N, Brooklyn Park, MN 55428" />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Book a bed" component={Link} to="/form">
-                      <i className="fas fa-bed" />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                {shelters.map(shelter => (
+                  <ListItem>
+                    <ListItemText
+                      primary={shelter.attributes.NAME}
+                      secondary={shelter.attributes.ADDRESS}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton aria-label="Book a bed" component={Link} to="/form">
+                        <i className="fas fa-bed" />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
               </List>
             </Grid>
           </Grid>
