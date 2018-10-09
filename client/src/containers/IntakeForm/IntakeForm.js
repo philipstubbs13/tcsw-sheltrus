@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 // Import Tabs component
 import Tabs from '../../components/Tabs';
+// Import Intake Form Field component
+import IntakeFormField from './IntakeFormField';
 // import css
 import './IntakeForm.css';
 
@@ -47,131 +48,50 @@ class IntakeForm extends Component {
               <Typography component="p">
                 Your information will be sent directly to the shelter.
               </Typography>
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-name"
                 label="Name"
-                fullWidth
-                margin="normal"
                 value="Josh Okogie"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-gender"
                 label="Gender"
-                fullWidth
-                margin="normal"
                 value="Male"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-sex-orientation"
                 label="Sexual Orientation"
-                fullWidth
-                margin="normal"
                 value="Heterosexual"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-dob"
                 label="Date of Birth"
-                fullWidth
-                margin="normal"
                 value="09/01/1998"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-marital"
                 label="Marital Status"
-                fullWidth
-                margin="normal"
                 value="Single"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
-                label="Have Kids?"
-                fullWidth
-                margin="normal"
-                value="No"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
-              />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
-                label="Have a pet?"
-                fullWidth
-                margin="normal"
-                value="Dog"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
-              />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
-                label="Have health insurance?"
-                fullWidth
-                margin="normal"
+              <IntakeFormField
+                id="intake-kids"
+                label="Have kids?"
                 value="Yes"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
-              <TextField
-                id="outlined-full-width"
-                className={classes.textField}
+              <IntakeFormField
+                id="intake-pet"
+                label="Have a pet"
+                value="Dog"
+              />
+              <IntakeFormField
+                id="intake-health-insurance"
+                label="Have health insurance?"
+                value="Yes"
+              />
+              <IntakeFormField
+                id="intake-ss"
                 label="Social security"
-                fullWidth
-                margin="normal"
                 value="xxx-xxx-3333"
-                variant="outlined"
-                disabled
-                InputLabelProps={{
-                  shrink: true,
-                  readOnly: true,
-                }}
               />
             </Grid>
           </Grid>
