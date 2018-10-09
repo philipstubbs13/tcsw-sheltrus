@@ -1,5 +1,8 @@
 // Global Import of React
 import React, { Component } from 'react';
+// Importing React Router to add page routes.
+// Import third-party routing library (react-router-dom)
+import { Link } from 'react-router-dom';
 // import prop types
 import PropTypes from 'prop-types';
 // Import Material UI components and styling.
@@ -28,23 +31,24 @@ const styles = {
     textAlign: 'center',
     fontSize: 20,
   },
+  loginGoogleInfo: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 20,
+  },
 };
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-    };
-  }
-
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     // ES6 destructuring
-    const { classes } = this.props;
-    const { username, password } = this.state;
+    const {
+      classes,
+      handleLogin,
+      username,
+      password,
+    } = this.props;
 
     return (
       <div>
@@ -56,7 +60,7 @@ class Login extends Component {
                 Sheltr
               </Typography>
               <Typography className={classes.loginPageInfo}>
-                Find or check in at a nearby homeless shelter.
+                Find or check in at a nearby shelter.
               </Typography>
               <Typography className={classes.loginPageInfo}>
                 Enter your username and password to LOGIN.
@@ -95,9 +99,15 @@ class Login extends Component {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
-              <Button variant="contained" color="primary" className="login-button" fullWidth>
+              <Button variant="contained" color="primary" className="login-button" fullWidth component={Link} to="/profile">
                 Login
               </Button>
+              <div className={classes.loginGoogleInfo}>
+                <p>OR Login with Google to use the app.</p>
+                <button type="submit" className="loginBtn loginBtn--google" onClick={handleLogin}>
+                  Login with Google
+                </button>
+              </div>
             </Grid>
           </Grid>
         </div>
@@ -109,6 +119,15 @@ class Login extends Component {
 // Check prop types
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  username: PropTypes.string,
+  password: PropTypes.string,
+};
+
+// Default prop types
+Login.defaultProps = {
+  username: '',
+  password: '',
 };
 
 // Export component

@@ -13,7 +13,7 @@ import Logo from '../../sheltr-b2.svg';
 const styles = {
   root: {
     flexGrow: 1,
-		fontSize: 30,
+    fontSize: 30,
   },
   grow: {
     flexGrow: 1,
@@ -26,12 +26,13 @@ const styles = {
 
 function NavBar(props) {
   const { classes } = props;
-	const {handleLogout} = props;
+  const { handleLogout } = props;
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className="app-bar">
         <Toolbar>
-					<img src={Logo} alt="Sheltr app logo" id="app-logo"></img>
+          <img src={Logo} alt="Sheltr app logo" id="app-logo" />
           <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/">
             Sheltr
           </Typography>
@@ -42,8 +43,11 @@ function NavBar(props) {
   );
 }
 
+// Check prop types.
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
+// export component
 export default withStyles(styles)(NavBar);
