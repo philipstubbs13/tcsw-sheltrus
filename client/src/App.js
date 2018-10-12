@@ -134,7 +134,7 @@ class App extends Component {
                     />
                     {/* <Route exact path="/help" component={Help} /> */}
                     <Route exact path="/shelters" component={Shelters} />
-                    <Route exact path="/form" component={IntakeForm} />
+                    <Route exact path="/form/:id" component={IntakeForm} />
                     <Route
                       exact
                       path="/ticket"

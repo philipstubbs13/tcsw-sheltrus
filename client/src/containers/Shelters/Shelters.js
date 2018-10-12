@@ -93,7 +93,7 @@ class Shelters extends Component {
                       secondary={shelter.attributes.ADDRESS}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton aria-label="Find a shelter" component={Link} to="/form">
+                      <IconButton aria-label="Find a shelter" component={Link} to={`/form/${shelter.attributes.OBJECTID}`}>
                         <i className="fas fa-bed" />
                       </IconButton>
                     </ListItemSecondaryAction>
