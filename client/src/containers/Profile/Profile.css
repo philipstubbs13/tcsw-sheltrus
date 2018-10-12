@@ -5,8 +5,8 @@
 
 .need-place-button:hover, .select-image-button:hover {
   background-color: transparent !important;
-  color: black;
-  border: 1px solid black;
+  color: var(--app-dark-color);
+  border: 1px solid var(--app-dark-color);
 }
 
 .select-image-button {

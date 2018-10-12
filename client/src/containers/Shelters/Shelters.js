@@ -8,23 +8,23 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Button from '@material-ui/core/Button';
 // Import Tabs component
 import Tabs from '../../components/Tabs';
+// Import css
+import './Shelters.css';
 
 // CSS in JS
 const styles = {
   placeToStay: {
     marginTop: 10,
     alignSelf: 'flex-center',
-  },
-  selectImageButton: {
-    marginBottom: 30,
   },
   SheltersPageTitle: {
     textAlign: 'center',
@@ -60,7 +60,7 @@ class Shelters extends Component {
               <Typography variant="h5" gutterBottom className={classes.SheltersPageTitle}>
                 Find a shelter
               </Typography>
-              <TextField
+              {/* <TextField
                 id="outlined-full-width"
                 label="Search"
                 style={{ marginTop: 10 }}
@@ -71,7 +71,7 @@ class Shelters extends Component {
                 InputLabelProps={{
                   shrink: true,
                 }}
-              />
+              /> */}
               <Typography variant="h6">
                 Tap <i className="fas fa-bed" /> to
                 reserve a bed at a participating shelter.
@@ -80,6 +80,9 @@ class Shelters extends Component {
                 the listing will say it is offline.
                 Please come back later to book a bed.
               </Typography>
+              <Button variant="contained" color="primary" className="map-view-btn" fullWidth component={Link} to="/map">
+                Map View
+              </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <List>
@@ -90,7 +93,7 @@ class Shelters extends Component {
                       secondary={shelter.attributes.ADDRESS}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton aria-label="Book a bed" component={Link} to="/form">
+                      <IconButton aria-label="Find a shelter" component={Link} to="/form">
                         <i className="fas fa-bed" />
                       </IconButton>
                     </ListItemSecondaryAction>
