@@ -80,7 +80,6 @@ class GoogleMapsContainer extends React.Component {
           <Paper>
             <Typography
               variant="h5"
-              component="h4"
             >
               Harbor Light Shelter
             </Typography>

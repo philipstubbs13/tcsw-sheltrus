@@ -35,10 +35,10 @@ function Footer(props) {
     <footer id="main-footer">
       <Card className={classes.card} color="inherit" direction="column" justify="center">
         <CardContent>
-          <Typography className={classes.title} color="textSecondary">
+          <Typography variant="h6" className={classes.title} color="textSecondary">
             Sheltr
           </Typography>
-          <Typography className={classes.copyright} color="textSecondary">
+          <Typography variant="h6" className={classes.copyright} color="textSecondary">
             Copyright &copy; 2018
           </Typography>
         </CardContent>

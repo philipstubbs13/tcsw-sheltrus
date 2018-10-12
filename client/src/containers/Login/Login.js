@@ -59,10 +59,10 @@ class Login extends Component {
               <Typography variant="h2" gutterBottom className={classes.loginPageTitle}>
                 Sheltr
               </Typography>
-              <Typography className={classes.loginPageInfo}>
+              <Typography variant="h6" className={classes.loginPageInfo}>
                 Find or check in at a nearby shelter.
               </Typography>
-              <Typography className={classes.loginPageInfo}>
+              <Typography variant="h6" className={classes.loginPageInfo}>
                 Enter your username and password to LOGIN.
               </Typography>
               <br />

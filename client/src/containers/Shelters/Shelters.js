@@ -72,8 +72,8 @@ class Shelters extends Component {
                   shrink: true,
                 }}
               />
-              <Typography component="p">
-                To book a bed, click <i className="fas fa-bed" /> to
+              <Typography variant="h6">
+                Tap <i className="fas fa-bed" /> to
                 reserve a bed at a participating shelter.
                 Each shelter has different booking times.
                 Outside the times you can book a bed,
@@ -84,7 +84,7 @@ class Shelters extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <List>
                 {shelters.map(shelter => (
-                  <ListItem>
+                  <ListItem key={shelter.attributes.OBJECTID}>
                     <ListItemText
                       primary={shelter.attributes.NAME}
                       secondary={shelter.attributes.ADDRESS}
