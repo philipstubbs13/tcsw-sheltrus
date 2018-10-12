@@ -50,10 +50,10 @@ class Ticket extends Component {
         <Tabs />
         <div className="page">
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
-            <Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
+            <Typography variant="h5" gutterBottom className={classes.checkInPageTitle}>
               Have a smart phone? SCAN to check into shelter
             </Typography>
-            <Typography variant="headline" gutterBottom className={classes.checkInPageTitle}>
+            <Typography variant="h5" gutterBottom className={classes.checkInPageTitle}>
               No smart phone? CALL (952) 960-5416
             </Typography>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>

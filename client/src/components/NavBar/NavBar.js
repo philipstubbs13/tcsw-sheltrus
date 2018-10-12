@@ -33,7 +33,7 @@ function NavBar(props) {
       <AppBar position="static" className="app-bar">
         <Toolbar>
           <img src={Logo} alt="Sheltr app logo" id="app-logo" />
-          <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/">
+          <Typography variant="h6" color="inherit" className={classes.grow} component={Link} to="/">
             Sheltr
           </Typography>
           <Button color="inherit" onClick={handleLogout} component={Link} to="/">Logout</Button>

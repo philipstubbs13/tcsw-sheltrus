@@ -30,7 +30,7 @@ function SimpleNavBar(props) {
       <AppBar position="static" className="app-bar">
         <Toolbar>
           <img src={Logo} alt="Shelter app logo" id="app-logo" />
-          <Typography variant="title" color="inherit" className={classes.grow} component={Link} to="/">
+          <Typography variant="h6" color="inherit" className={classes.grow} component={Link} to="/">
             Sheltr
           </Typography>
         </Toolbar>

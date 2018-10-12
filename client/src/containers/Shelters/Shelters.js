@@ -56,8 +56,8 @@ class Shelters extends Component {
         <Tabs />
         <div className="page">
           <Grid container justify="center" spacing={16} className="{classes.profileContainer}">
-            <Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <Typography variant="headline" gutterBottom className={classes.SheltersPageTitle}>
+            <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+              <Typography variant="h5" gutterBottom className={classes.SheltersPageTitle}>
                 Find a shelter
               </Typography>
               <TextField

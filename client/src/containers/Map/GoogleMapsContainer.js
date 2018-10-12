@@ -79,7 +79,7 @@ class GoogleMapsContainer extends React.Component {
         >
           <Paper>
             <Typography
-              variant="headline"
+              variant="h5"
               component="h4"
             >
               Harbor Light Shelter
@@ -105,7 +105,7 @@ class GoogleMapsContainer extends React.Component {
         >
           <Paper>
             <Typography
-              variant="headline"
+              variant="h5"
               component="h4"
             >
               Marys Place
@@ -131,7 +131,7 @@ class GoogleMapsContainer extends React.Component {
         >
           <Paper>
             <Typography
-              variant="headline"
+              variant="h5"
               component="h4"
             >
               Higher Ground

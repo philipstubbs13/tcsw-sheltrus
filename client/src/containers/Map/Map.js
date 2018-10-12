@@ -33,7 +33,7 @@ class Map extends Component {
         <div className="page">
           <Grid container spacing={16} className={classes.mapContainer}>
             <Grid item justify="center" xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <Typography variant="headline" gutterBottom className={classes.MapPageTitle}>
+              <Typography variant="h5" gutterBottom className={classes.MapPageTitle}>
                 Map
               </Typography>
               <GoogleMapsContainer />

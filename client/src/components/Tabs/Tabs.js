@@ -31,7 +31,7 @@ class Tabs extends React.Component {
     const { value } = this.state;
 
     return (
-      <BottomNavigation value={value} onChange={this.handleChange} className={classes.root} showLabels="true" justify="center">
+      <BottomNavigation value={value} onChange={this.handleChange} className={classes.root} showLabels justify="center">
         <BottomNavigationAction label="My profile" value="recents" icon={<i className="fas fa-user-circle fa-2x" />} component={Link} to="/" />
         <BottomNavigationAction label="Book a bed" value="favorites" icon={<i className="fas fa-bed fa-2x" />} component={Link} to="/shelters" />
         <BottomNavigationAction label="Check in" value="nearby" icon={<i className="fas fa-qrcode fa-2x" />} component={Link} to="/ticket" />

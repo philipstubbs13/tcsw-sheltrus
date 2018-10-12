@@ -43,7 +43,7 @@ class Profile extends Component {
         <div className="page">
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <Typography variant="display3">{name}</Typography>
+              <Typography variant="h2">{name}</Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <img

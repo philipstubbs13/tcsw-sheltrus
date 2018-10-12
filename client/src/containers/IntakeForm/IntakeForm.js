@@ -36,7 +36,7 @@ class IntakeForm extends Component {
         <div className="page">
           <Grid container spacing={16}>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <Typography variant="headline" className={classes.formPageTitle}>
+              <Typography variant="h2" className={classes.formPageTitle}>
                 Click SUBMIT to book your bed now.
               </Typography>
               <br />
