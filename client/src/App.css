@@ -9,11 +9,6 @@
 	--form-error-color: red;
 }
 
-.page {
-  margin-left: 20px;
-	margin-right: 20px;
-}
-
 .page-container {
   display: flex;
   justify-content: center; /* align horizontal */
@@ -27,7 +22,6 @@ a {
 .page {
 	margin: 2rem;
 	min-height: calc(100vh - 40px);
-	margin-top: 4rem;
 }
 
 #app-logo {
