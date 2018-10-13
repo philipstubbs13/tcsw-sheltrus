@@ -10,10 +10,13 @@ import './MapView.css';
 
 const AnyReactComponent = ({ text }) => (
   <div>
-    <div className="pin">
-      {/* {text} */}
+    {/* <div className="pin">
+      {text}
     </div>
     <div className="pulse">
+      {text}
+    </div> */}
+    <div className="shelterPin">
       {text}
     </div>
   </div>
