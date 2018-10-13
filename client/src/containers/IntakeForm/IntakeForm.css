@@ -1,3 +1,10 @@
+.book-bed-submit-button {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
 .book-bed-submit-button:hover {
   background-color: transparent !important;
   color: black;

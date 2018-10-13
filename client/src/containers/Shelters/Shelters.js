@@ -8,15 +8,12 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-// import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Button from '@material-ui/core/Button';
 // Import Tabs component
 import Tabs from '../../components/Tabs';
+// Import Shelter (singular) component
+import Shelter from './Shelter';
 // Import css
 import './Shelters.css';
 
@@ -60,18 +57,6 @@ class Shelters extends Component {
               <Typography variant="h5" gutterBottom className={classes.SheltersPageTitle}>
                 Find a shelter
               </Typography>
-              {/* <TextField
-                id="outlined-full-width"
-                label="Search"
-                style={{ marginTop: 10 }}
-                placeholder="Search for a place to stay..."
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              /> */}
               <Typography variant="h6">
                 Tap <i className="fas fa-bed" /> to
                 reserve a bed at a participating shelter.
@@ -87,17 +72,11 @@ class Shelters extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <List>
                 {shelters.map(shelter => (
-                  <ListItem key={shelter.attributes.OBJECTID}>
-                    <ListItemText
-                      primary={shelter.attributes.NAME}
-                      secondary={shelter.attributes.ADDRESS}
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton aria-label="Find a shelter" component={Link} to={`/form/${shelter.attributes.OBJECTID}`}>
-                        <i className="fas fa-bed" />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  <Shelter
+                    id={shelter.attributes.OBJECTID}
+                    name={shelter.attributes.NAME}
+                    address={shelter.attributes.ADDRESS}
+                  />
                 ))}
               </List>
             </Grid>
