@@ -64,7 +64,7 @@ class IntakeForm extends Component {
     const { classes, match } = this.props;
     const { shelters } = this.state;
     // console.log(this.props);
-    console.log(shelters);
+    // console.log(shelters);
 
     return (
       <div>
@@ -124,7 +124,7 @@ class IntakeForm extends Component {
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               {shelters.filter(shelter => shelter.attributes.OBJECTID == match.params.id).map(shelter => (
-                <SimpleMap lng={shelter.geometry.x} lat={shelter.geometry.y} text={shelter.attributes.NAME}/>
+                <SimpleMap lng={shelter.geometry.x} lat={shelter.geometry.y} text={shelter.attributes.NAME} />
               ))}
               <div className={classes.readOnlyInfo}>
                 <Typography variant="h6">

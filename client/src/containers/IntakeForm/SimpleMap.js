@@ -1,5 +1,9 @@
+// Global import of React
 import React, { Component } from 'react';
+// Import google map react component
 import GoogleMapReact from 'google-map-react';
+// import prop types
+import PropTypes from 'prop-types';
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -28,16 +32,22 @@ class SimpleMap extends Component {
   };
 
   render() {
-    console.log(this.props);
-    const { lat, lng, text } = this.props;
+    // console.log(this.props);
+    const {
+      lat,
+      lng,
+      text,
+      center,
+      zoom,
+    } = this.props;
 
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBlNQbJHExNycQQQRotKkzcGD31jK6DduI' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          defaultCenter={center}
+          defaultZoom={zoom}
         >
           <AnyReactComponent
             lat={lat}
@@ -50,4 +60,12 @@ class SimpleMap extends Component {
   }
 }
 
+// Check prop types
+SimpleMap.propTypes = {
+  text: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
+};
+
+// Export component.
 export default SimpleMap;
