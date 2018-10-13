@@ -14,8 +14,8 @@ import Button from '@material-ui/core/Button';
 import Tabs from '../../components/Tabs';
 // Import Shelter (singular) component
 import Shelter from './Shelter';
-// Import Map component
-import Map from '../Map';
+// Import MapView component
+import MapView from './MapView';
 // Import css
 import './Shelters.css';
 
@@ -90,7 +90,7 @@ class Shelters extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               {showMap
                 ? (
-                  <Map />
+                  <MapView />
               )
               : (
                 <div>
