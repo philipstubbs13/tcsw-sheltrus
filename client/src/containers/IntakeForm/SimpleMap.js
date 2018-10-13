@@ -1,3 +1,4 @@
+// https://github.com/google-map-react/google-map-react
 // Global import of React
 import React, { Component } from 'react';
 // Import google map react component

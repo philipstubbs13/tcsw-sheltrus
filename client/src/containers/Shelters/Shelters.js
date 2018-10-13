@@ -14,6 +14,8 @@ import Button from '@material-ui/core/Button';
 import Tabs from '../../components/Tabs';
 // Import Shelter (singular) component
 import Shelter from './Shelter';
+// Import Map component
+import Map from '../Map';
 // Import css
 import './Shelters.css';
 
@@ -21,7 +23,6 @@ import './Shelters.css';
 const styles = {
   placeToStay: {
     marginTop: 10,
-    alignSelf: 'flex-center',
   },
   SheltersPageTitle: {
     textAlign: 'center',
@@ -35,6 +36,8 @@ class Shelters extends Component {
     super();
     this.state = {
       shelters: [],
+      showMap: false,
+      buttonLabel: 'MAP VIEW',
     };
   }
 
@@ -45,43 +48,70 @@ class Shelters extends Component {
     // console.log(this.state.shelters);
   }
 
+  // On click handler for toggling Map/List view
+  handleToggleMap = () => {
+    // ES6 destructuring
+    const {
+      showMap,
+      buttonLabel,
+    } = this.state;
+
+    // console.log("Toggle map");
+    if (showMap) {
+      this.setState({
+        showMap: false,
+        buttonLabel: 'MAP VIEW',
+      });
+    } else {
+      this.setState({
+        showMap: true,
+        buttonLabel: 'LIST VIEW',
+      });
+    }
+    console.log(showMap);
+  }
+
   render() {
     const { classes } = this.props;
-    const { shelters } = this.state;
+    const { shelters, buttonLabel, showMap } = this.state;
     return (
       <div>
         <Tabs />
         <div className="page">
           <Grid container justify="center" spacing={16} className="{classes.profileContainer}">
-            <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+            <Grid item xs={12} className={classes.placeToStay}>
               <Typography variant="h5" gutterBottom className={classes.SheltersPageTitle}>
                 Find a shelter
               </Typography>
-              <Typography variant="h6">
-                Tap <i className="fas fa-bed" /> to
-                reserve a bed at a participating shelter.
-                Each shelter has different booking times.
-                Outside the times you can book a bed,
-                the listing will say it is offline.
-                Please come back later to book a bed.
-              </Typography>
-              <Button variant="contained" color="primary" className="map-view-btn" fullWidth component={Link} to="/map">
-                Map View
+              <Button variant="contained" color="primary" className="map-view-btn" onClick={this.handleToggleMap}>
+                {buttonLabel}
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <List>
-                {shelters.map(shelter => (
-                  <Shelter
-                    id={shelter.attributes.OBJECTID}
-                    name={shelter.attributes.NAME}
-                    address={shelter.attributes.ADDRESS}
-                    city={shelter.attributes.CITY}
-                    zip={shelter.attributes.ZIP}
-                    type={shelter.attributes.SERV_TYPE}
-                  />
-                ))}
-              </List>
+              {showMap
+                ? (
+                  <Map />
+              )
+              : (
+                <div>
+                  <Typography variant="h6" style={{ textAlign: 'center' }}>
+                    Tap <i className="fas fa-bed" /> to
+                    reserve a bed at a participating shelter.
+                  </Typography>
+                  <List>
+                    {shelters.map(shelter => (
+                      <Shelter
+                        id={shelter.attributes.OBJECTID}
+                        name={shelter.attributes.NAME}
+                        address={shelter.attributes.ADDRESS}
+                        city={shelter.attributes.CITY}
+                        zip={shelter.attributes.ZIP}
+                        type={shelter.attributes.SERV_TYPE}
+                      />
+                    ))}
+                  </List>
+                </div>
+              )}
             </Grid>
           </Grid>
         </div>

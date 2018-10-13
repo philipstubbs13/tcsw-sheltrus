@@ -1,6 +1,11 @@
 .map-view-btn {
   margin-top: 10px !important;
   padding: 1rem !important;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 20% !important;
+  text-align: center !important;
+  font-size: 20px !important;
 }
 
 .map-view-btn:hover {
