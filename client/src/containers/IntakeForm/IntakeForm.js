@@ -29,13 +29,6 @@ const styles = ({
   },
   moreShelterInfo: {
     fontSize: 18,
-    marginTop: 30,
-    textAlign: 'center',
-  },
-  shelterInfoBold: {
-    fontWeight: 'bold',
-  },
-  shelterAddress: {
     marginTop: 15,
     textAlign: 'center',
   },
@@ -75,7 +68,7 @@ class IntakeForm extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <Grid container justify="center" direction="column">
                 <Typography variant="h6" className={classes.formPageTitle}>
-                Click SUBMIT to book your bed now.
+                Tap SUBMIT to reserve a bed now.
                 </Typography>
                 <br />
                 <Button variant="contained" color="primary" className="book-bed-submit-button" component={Link} to="/">
@@ -87,23 +80,33 @@ class IntakeForm extends Component {
                       <div className={classes.shelterName}>
                         <Typography variant="h4">{shelter.attributes.NAME}</Typography>
                       </div>
-                      <div className={classes.shelterAddress}>
-                        <Typography variant="h6">Location</Typography>
-                        <Typography variant="subtitle1">{shelter.attributes.ADDRESS}</Typography>
-                        <Typography variant="subtitle1">{shelter.attributes.CITY}, MN {shelter.attributes.ZIP}</Typography>
-                      </div>
-                      <div className={classes.moreShelterInfo}>
-                        <Typography variant="h6">Phone</Typography>
-                        <Typography variant="subtitle1">{shelter.attributes.PHONE}</Typography>
-                      </div>
-                      <div className={classes.moreShelterInfo}>
-                        <Typography variant="h6">Web Site</Typography>
-                        <Typography variant="subtitle1"><a href={shelter.attributes.WEB_SITE} target="_blank" rel="noopener noreferrer">{shelter.attributes.WEB_SITE}</a></Typography>
-                      </div>
-                      <div className={classes.moreShelterInfo}>
-                        <Typography variant="h6">Type</Typography>
-                        <Typography variant="subtitle1">{shelter.attributes.SERV_TYPE} - {shelter.attributes.SUB_SERV_TYPE}</Typography>
-                      </div>
+                      <Grid container spacing={16}>
+                        <Grid item xs={6}>
+                          <div className={classes.moreShelterInfo}>
+                            <Typography variant="h6">Location</Typography>
+                            <Typography variant="subtitle1">{shelter.attributes.ADDRESS}</Typography>
+                            <Typography variant="subtitle1">{shelter.attributes.CITY}, MN {shelter.attributes.ZIP}</Typography>
+                          </div>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <div className={classes.moreShelterInfo}>
+                            <Typography variant="h6">Phone</Typography>
+                            <Typography variant="subtitle1">{shelter.attributes.PHONE}</Typography>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div className={classes.moreShelterInfo}>
+                            <Typography variant="h6">More info</Typography>
+                            <Typography variant="subtitle1"><a href={shelter.attributes.WEB_SITE} target="_blank" rel="noopener noreferrer">{shelter.attributes.WEB_SITE}</a></Typography>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div className={classes.moreShelterInfo}>
+                            <Typography variant="h6">Type</Typography>
+                            <Typography variant="subtitle1">{shelter.attributes.SERV_TYPE} - {shelter.attributes.SUB_SERV_TYPE}</Typography>
+                          </div>
+                        </Grid>
+                      </Grid>
                       <div className={classes.moreShelterInfo}>
                         <Typography variant="h6">Notes</Typography>
                         <Typography variant="subtitle1">{shelter.attributes.NOTES}</Typography>

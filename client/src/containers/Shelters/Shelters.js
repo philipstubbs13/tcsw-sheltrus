@@ -76,6 +76,9 @@ class Shelters extends Component {
                     id={shelter.attributes.OBJECTID}
                     name={shelter.attributes.NAME}
                     address={shelter.attributes.ADDRESS}
+                    city={shelter.attributes.CITY}
+                    zip={shelter.attributes.ZIP}
+                    type={shelter.attributes.SERV_TYPE}
                   />
                 ))}
               </List>
