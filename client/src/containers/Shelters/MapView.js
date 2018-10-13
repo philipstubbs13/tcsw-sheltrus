@@ -10,8 +10,12 @@ import './MapView.css';
 
 const AnyReactComponent = ({ text }) => (
   <div>
-    <div className="pin" />
-    <div className="pulse" />
+    <div className="pin">
+      {/* {text} */}
+    </div>
+    <div className="pulse">
+      {text}
+    </div>
   </div>
 );
 
@@ -32,6 +36,7 @@ class MapView extends Component {
       text,
       center,
       zoom,
+      shelters,
     } = this.props;
 
     return (
@@ -42,17 +47,17 @@ class MapView extends Component {
           defaultCenter={center}
           defaultZoom={zoom}
         >
-          <AnyReactComponent lat="44.97739398423485" lng="-93.26016642652104" />
-          <AnyReactComponent lat="44.95223611579655" lng="-93.27699235207683" />
-          <AnyReactComponent lat="44.981477790713" lng="-93.28126724625996" />
+          {shelters.map(shelter => (
+            <AnyReactComponent
+              lat={shelter.geometry.y}
+              lng={shelter.geometry.x}
+              text={shelter.attributes.OBJECTID}
+            />
+          ))}
         </GoogleMapReact>
       </div>
     );
   }
-}
-
-const Marker = props => {
-  return <div className=".pin"></div>
 }
 
 // Check prop types
@@ -60,6 +65,7 @@ MapView.propTypes = {
   text: PropTypes.string.isRequired,
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired,
+  shelters: PropTypes.array.isRequired,
 };
 
 // Export component.

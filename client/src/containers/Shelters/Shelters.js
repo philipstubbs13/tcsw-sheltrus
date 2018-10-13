@@ -1,7 +1,5 @@
 // Global Import of React
 import React, { Component } from 'react';
-// import third-party routing library (react-router-dom)
-import { Link } from 'react-router-dom';
 // import prop types
 import PropTypes from 'prop-types';
 // Import Material UI Components and styling
@@ -68,7 +66,7 @@ class Shelters extends Component {
         buttonLabel: 'LIST VIEW',
       });
     }
-    console.log(showMap);
+    // console.log(showMap);
   }
 
   render() {
@@ -90,28 +88,28 @@ class Shelters extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               {showMap
                 ? (
-                  <MapView />
-              )
-              : (
-                <div>
-                  <Typography variant="h6" style={{ textAlign: 'center' }}>
-                    Tap <i className="fas fa-bed" /> to
-                    reserve a bed at a participating shelter.
-                  </Typography>
-                  <List>
-                    {shelters.map(shelter => (
-                      <Shelter
-                        id={shelter.attributes.OBJECTID}
-                        name={shelter.attributes.NAME}
-                        address={shelter.attributes.ADDRESS}
-                        city={shelter.attributes.CITY}
-                        zip={shelter.attributes.ZIP}
-                        type={shelter.attributes.SERV_TYPE}
-                      />
-                    ))}
-                  </List>
-                </div>
-              )}
+                  <MapView shelters={shelters} />
+                )
+                : (
+                  <div>
+                    <Typography variant="h6" style={{ textAlign: 'center' }}>
+                      Tap <i className="fas fa-bed" /> to
+                      reserve a bed at a participating shelter.
+                    </Typography>
+                    <List>
+                      {shelters.map(shelter => (
+                        <Shelter
+                          id={shelter.attributes.OBJECTID}
+                          name={shelter.attributes.NAME}
+                          address={shelter.attributes.ADDRESS}
+                          city={shelter.attributes.CITY}
+                          zip={shelter.attributes.ZIP}
+                          type={shelter.attributes.SERV_TYPE}
+                        />
+                      ))}
+                    </List>
+                  </div>
+                )}
             </Grid>
           </Grid>
         </div>
