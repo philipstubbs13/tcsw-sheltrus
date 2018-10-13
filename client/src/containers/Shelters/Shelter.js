@@ -12,12 +12,19 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 class Shelter extends Component {
   render() {
-    const { id, name, address } = this.props;
+    const {
+      id,
+      name,
+      address,
+      zip,
+      city,
+    } = this.props;
+    const location = `${address}, ${city}, MN ${zip}`;
     return (
       <ListItem key={id}>
         <ListItemText
           primary={name}
-          secondary={address}
+          secondary={location}
         />
         <ListItemSecondaryAction>
           <IconButton aria-label="Find a shelter" component={Link} to={`/form/${id}`}>
@@ -34,6 +41,8 @@ Shelter.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  zip: PropTypes.number.isRequired,
 };
 
 // export component.

@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Tabs from '../../components/Tabs';
 // Import Intake Form Field component
 import IntakeFormField from './IntakeFormField';
+// Import SimpleMap component
+import SimpleMap from './SimpleMap';
 // import css
 import './IntakeForm.css';
 
@@ -34,6 +36,9 @@ const styles = ({
   },
   shelterName: {
     textAlign: 'center',
+    marginTop: 40,
+  },
+  readOnlyInfo: {
     marginTop: 40,
   },
 });
@@ -117,54 +122,57 @@ class IntakeForm extends Component {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
-              <Typography variant="h6">
-                Your information will be sent directly to the shelter.
-              </Typography>
-              <IntakeFormField
-                id="intake-name"
-                label="Name"
-                value="Josh Okogie"
-              />
-              <IntakeFormField
-                id="intake-gender"
-                label="Gender"
-                value="Male"
-              />
-              <IntakeFormField
-                id="intake-sex-orientation"
-                label="Sexual Orientation"
-                value="Heterosexual"
-              />
-              <IntakeFormField
-                id="intake-dob"
-                label="Date of Birth"
-                value="09/01/1998"
-              />
-              <IntakeFormField
-                id="intake-marital"
-                label="Marital Status"
-                value="Single"
-              />
-              <IntakeFormField
-                id="intake-kids"
-                label="Have kids?"
-                value="Yes"
-              />
-              <IntakeFormField
-                id="intake-pet"
-                label="Have a pet"
-                value="Dog"
-              />
-              <IntakeFormField
-                id="intake-health-insurance"
-                label="Have health insurance?"
-                value="Yes"
-              />
-              <IntakeFormField
-                id="intake-ss"
-                label="Social security"
-                value="xxx-xxx-3333"
-              />
+              <SimpleMap />
+              <div className={classes.readOnlyInfo}>
+                <Typography variant="h6">
+                  Your information will be sent directly to the shelter.
+                </Typography>
+                <IntakeFormField
+                  id="intake-name"
+                  label="Name"
+                  value="Josh Okogie"
+                />
+                <IntakeFormField
+                  id="intake-gender"
+                  label="Gender"
+                  value="Male"
+                />
+                <IntakeFormField
+                  id="intake-sex-orientation"
+                  label="Sexual Orientation"
+                  value="Heterosexual"
+                />
+                <IntakeFormField
+                  id="intake-dob"
+                  label="Date of Birth"
+                  value="09/01/1998"
+                />
+                <IntakeFormField
+                  id="intake-marital"
+                  label="Marital Status"
+                  value="Single"
+                />
+                <IntakeFormField
+                  id="intake-kids"
+                  label="Have kids?"
+                  value="Yes"
+                />
+                <IntakeFormField
+                  id="intake-pet"
+                  label="Have a pet"
+                  value="Dog"
+                />
+                <IntakeFormField
+                  id="intake-health-insurance"
+                  label="Have health insurance?"
+                  value="Yes"
+                />
+                <IntakeFormField
+                  id="intake-ss"
+                  label="Social security"
+                  value="xxx-xxx-3333"
+                />
+              </div>
             </Grid>
           </Grid>
         </div>
