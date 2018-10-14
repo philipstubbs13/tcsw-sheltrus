@@ -8,8 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button';
-// Import Tabs component
-import Tabs from '../../components/Tabs';
 // Import Shelter (singular) component
 import Shelter from './Shelter';
 // Import MapView component
@@ -74,7 +72,6 @@ class Shelters extends Component {
     const { shelters, buttonLabel, showMap } = this.state;
     return (
       <div>
-        <Tabs />
         <div className="page">
           <Grid container justify="center" spacing={16} className="{classes.profileContainer}">
             <Grid item xs={12} className={classes.placeToStay}>

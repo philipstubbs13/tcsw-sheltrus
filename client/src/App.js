@@ -21,6 +21,8 @@ import Login from './containers/Login';
 import Footer from './components/Footer';
 // Import NavBar component (when user is authenticated)
 import NavBar from './components/NavBar';
+// Import Tabs component (when user is authenticated)
+import Tabs from './components/Tabs';
 // import CSS for Login page that user will see if they are not authenticated.
 import './containers/Login/Login.css';
 // import Firebase configuration.
@@ -118,6 +120,7 @@ class App extends Component {
               ? (
                 <div>
                   <NavBar handleLogout={this.logout} />
+                  <Tabs />
                   <Switch>
                     <Route
                       exact

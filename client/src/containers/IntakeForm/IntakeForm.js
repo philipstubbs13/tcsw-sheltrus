@@ -9,8 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// Import Tabs component
-import Tabs from '../../components/Tabs';
 // Import Intake Form Field component
 import IntakeFormField from './IntakeFormField';
 // Import SimpleMap component
@@ -68,7 +66,6 @@ class IntakeForm extends Component {
 
     return (
       <div>
-        <Tabs />
         <div className="page">
           <Grid container spacing={16}>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>

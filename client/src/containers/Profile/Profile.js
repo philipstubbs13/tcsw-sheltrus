@@ -11,8 +11,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // import css
 import './Profile.css';
-// Import Tabs component
-import Tabs from '../../components/Tabs';
 
 const styles = {
   profileInfo: {
@@ -39,7 +37,6 @@ class Profile extends Component {
 
     return (
       <div>
-        <Tabs />
         <div className="page">
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>

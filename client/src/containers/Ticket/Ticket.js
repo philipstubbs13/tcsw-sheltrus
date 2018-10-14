@@ -8,8 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 // Import qrcode placeholder
 import qrCode from './qrcode.png';
-// Import Tabs component
-import Tabs from '../../components/Tabs';
 
 // CSS in JS
 const styles = {
@@ -47,7 +45,6 @@ class Ticket extends Component {
 
     return (
       <div>
-        <Tabs />
         <div className="page">
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
             <Typography variant="h5" gutterBottom className={classes.checkInPageTitle}>
