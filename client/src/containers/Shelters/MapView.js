@@ -5,17 +5,9 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 // import prop types
 import PropTypes from 'prop-types';
-// import css
-import './MapView.css';
 
 const AnyReactComponent = ({ text }) => (
   <div>
-    {/* <div className="pin">
-      {text}
-    </div>
-    <div className="pulse">
-      {text}
-    </div> */}
     <div className="shelterPin">
       {text}
     </div>

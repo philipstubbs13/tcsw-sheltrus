@@ -99,6 +99,7 @@ class Shelters extends Component {
                     <List>
                       {shelters.map(shelter => (
                         <Shelter
+                          key={shelter.attributes.OBJECTID}
                           id={shelter.attributes.OBJECTID}
                           name={shelter.attributes.NAME}
                           address={shelter.attributes.ADDRESS}

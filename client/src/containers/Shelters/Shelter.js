@@ -22,6 +22,9 @@ class Shelter extends Component {
     const location = `${address}, ${city}, MN ${zip}`;
     return (
       <ListItem key={id}>
+        <div className="shelterPin">
+          {id}
+        </div>
         <ListItemText
           primary={name}
           secondary={location}
