@@ -1,7 +1,5 @@
 // Global Import of React
 import React, { Component } from 'react';
-// import third-party routing library (react-router-dom)
-import { Link } from 'react-router-dom';
 // import prop types
 import PropTypes from 'prop-types';
 // Import Material UI components and styling
@@ -16,18 +14,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './Help.css';
 
 const styles = {
-  profileInfo: {
-    marginTop: 30,
-  },
-  profilePic: {
-    borderRadius: '50%',
-    maxWidth: '100%',
-    width: '200px',
-    height: '200px',
-    borderColor: 'var(--app-dark-color)',
-    borderStyle: 'solid',
-    borderWidth: 3,
-  },
   placeToStay: {
     marginTop: 10,
   },

@@ -18,6 +18,7 @@ import IntakeForm from './containers/IntakeForm';
 import Ticket from './containers/Ticket';
 import Login from './containers/Login';
 import About from './containers/About';
+import ReportError from './containers/ReportError';
 // import Footer component
 import Footer from './components/Footer';
 // Import NavBar component (when user is authenticated)
@@ -138,6 +139,7 @@ class App extends Component {
                     />
                     <Route exact path="/help" component={Help} />
                     <Route exact path="/shelters" component={Shelters} />
+                    <Route exact path="/error" component={ReportError} />
                     <Route exact path="/form/:id" component={IntakeForm} />
                     <Route
                       exact
