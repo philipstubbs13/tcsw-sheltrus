@@ -43,11 +43,6 @@ function Footer(props) {
           </Typography>
         </CardContent>
         <br />
-        <CardActions>
-          <a href="https://shelterus.co" target="_blank" rel="noopener noreferrer">
-            <Button variant="contained" size="large">Learn More</Button>
-          </a>
-        </CardActions>
       </Card>
     </footer>
   );

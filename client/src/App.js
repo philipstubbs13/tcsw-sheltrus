@@ -17,6 +17,7 @@ import Map from './containers/Map';
 import IntakeForm from './containers/IntakeForm';
 import Ticket from './containers/Ticket';
 import Login from './containers/Login';
+import About from './containers/About';
 // import Footer component
 import Footer from './components/Footer';
 // Import NavBar component (when user is authenticated)
@@ -152,6 +153,7 @@ class App extends Component {
                       )}
                     />
                     <Route exact path="/map" component={Map} />
+                    <Route exact path="/about" component={About} />
                   </Switch>
                 </div>
               )
