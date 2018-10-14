@@ -61,7 +61,7 @@ class Tabs extends React.Component {
       <div>
         <BottomNavigation value={value} onChange={this.handleChange} className={classes.root} showLabels justify="center">
           <BottomNavigationAction label="My profile" value="recents" icon={<i className="fas fa-user-circle fa-2x" />} component={Link} to="/" />
-          <BottomNavigationAction label="Find a shelter" value="favorites" icon={<i className="fas fa-bed fa-2x" />} component={Link} to="/shelters" />
+          <BottomNavigationAction label="Shelters" value="favorites" icon={<i className="fas fa-bed fa-2x" />} component={Link} to="/shelters" />
           <BottomNavigationAction label="Check in" value="nearby" icon={<i className="fas fa-user-check fa-2x" />} component={Link} to="/ticket" />
           <BottomNavigationAction label="More" value="nearby" icon={<i className="fas fa-bars fa-2x" />} onClick={this.toggleDrawer('right', true)} />
         </BottomNavigation>

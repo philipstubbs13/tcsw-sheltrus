@@ -13,7 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Profile from './containers/Profile';
 import Shelters from './containers/Shelters';
 import Map from './containers/Map';
-// import Help from './containers/Help';
+import Help from './containers/Help';
 import IntakeForm from './containers/IntakeForm';
 import Ticket from './containers/Ticket';
 import Login from './containers/Login';
@@ -136,7 +136,7 @@ class App extends Component {
                         />
                       )}
                     />
-                    {/* <Route exact path="/help" component={Help} /> */}
+                    <Route exact path="/help" component={Help} />
                     <Route exact path="/shelters" component={Shelters} />
                     <Route exact path="/form/:id" component={IntakeForm} />
                     <Route
