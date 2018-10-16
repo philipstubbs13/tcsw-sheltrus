@@ -64,18 +64,6 @@ class MapView extends Component {
     return (
       // Important! Always set the container height explicitly
       <div>
-        <Typography
-          variant="h5"
-        >
-          Harbor Light Shelter
-        </Typography>
-        <Typography
-          component="p"
-        >
-          1010 Currie Ave, Minneapolis, MN 55403
-          <br />
-          302-293-8627
-        </Typography>
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyBlNQbJHExNycQQQRotKkzcGD31jK6DduI' }}

@@ -73,7 +73,7 @@ class Shelters extends Component {
     return (
       <div>
         <div className="page">
-          <Grid container justify="center" spacing={16} className="{classes.profileContainer}">
+          <Grid container justify="center" spacing={16}>
             <Grid item xs={12} className={classes.placeToStay}>
               <Typography variant="h5" gutterBottom className={classes.SheltersPageTitle}>
                 Find a shelter
@@ -85,7 +85,22 @@ class Shelters extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               {showMap
                 ? (
-                  <MapView shelters={shelters} />
+                  <div>
+                    <MapView shelters={shelters} />
+                    <List>
+                      {shelters.map(shelter => (
+                        <Shelter
+                          key={shelter.attributes.OBJECTID}
+                          id={shelter.attributes.OBJECTID}
+                          name={shelter.attributes.NAME}
+                          address={shelter.attributes.ADDRESS}
+                          city={shelter.attributes.CITY}
+                          zip={shelter.attributes.ZIP}
+                          type={shelter.attributes.SERV_TYPE}
+                        />
+                      ))}
+                    </List>
+                  </div>
                 )
                 : (
                   <div>
