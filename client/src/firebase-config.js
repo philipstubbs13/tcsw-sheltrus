@@ -4,6 +4,7 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+import 'firebase/storage';
 
 
 const config = {
@@ -21,4 +22,6 @@ firebase.initializeApp(config);
 // Google Authentication for sign in anywhere inside of our application
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
+export const database = firebase.database();
+export const storage = firebase.storage();
 export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();

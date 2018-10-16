@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { storage, database } from '../../firebase-config';
 // import css
 import './Profile.css';
 
@@ -31,6 +32,28 @@ const styles = {
 };
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.storageRef = storage.ref('/user-images').child(props.uid);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    // const file = event.target.file;
+    console.log(event);
+    // const uploadTask = this.storageRef.child(file)
+    //   .put(file, { contentType: file.type });
+
+    // uploadTask.on('state_changed', (snapshot) => {
+    //   console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
+    // });
+
+    // uploadTask.then((snapshot) => {
+    //   this.userRef.child('photoURL').set(snapshot.downloadURL);
+    // });
+  }
+
   render() {
     const { classes, name, photo } = this.props;
     // console.log(this.props);
@@ -49,8 +72,14 @@ class Profile extends Component {
                 className={classes.profilePic}
               />
               <br />
-              <Button fullWidth variant="contained" color="primary" className="select-image-button">
-                Select image
+              <Button
+                fullWidth
+                containerElement='label'
+                variant="contained"
+                color="primary" className="select-image-button"
+              >
+                Select an image
+                <input type="file" hidden />
               </Button>
               <br />
               <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">

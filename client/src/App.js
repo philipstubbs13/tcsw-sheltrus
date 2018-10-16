@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 // Import Material UI components and styling.
 import { withStyles } from '@material-ui/core/styles';
+// Import Lodash
+import pick from 'lodash/pick';
 // Import app pages
 import Profile from './containers/Profile';
 import Shelters from './containers/Shelters';
@@ -28,7 +30,7 @@ import Tabs from './components/Tabs';
 // import CSS for Login page that user will see if they are not authenticated.
 import './containers/Login/Login.css';
 // import Firebase configuration.
-import { auth, provider } from './firebase-config';
+import { auth, provider, database } from './firebase-config';
 // Import top level css file for app
 import './App.css';
 
@@ -48,12 +50,15 @@ const styles = {
 };
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.usersRef = null;
+    this.userRef = null;
     this.state = {
       user: null,
       username: '',
       password: '',
+      users: {},
     };
 
     this.login = this.login.bind(this);
@@ -67,6 +72,19 @@ class App extends Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
+        this.usersRef = database.ref('/users');
+        this.userRef = this.usersRef.child(user.uid);
+
+        this.userRef.once('value').then((snapshot) => {
+          if (snapshot.val()) return;
+          const userData = pick(user, ['displayName', 'photoURL', 'email', 'uid']);
+          this.userRef.set(userData);
+        });
+
+        this.usersRef.on('value', (snapshot) => {
+          this.setState({ users: snapshot.val() });
+        });
+        console.log(user);
       }
     });
   }
