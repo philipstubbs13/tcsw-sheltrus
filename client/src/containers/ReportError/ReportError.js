@@ -19,6 +19,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { database } from '../../firebase-config';
 // import css
 import './ReportError.css';
+// import ReportErrorField component
+import ReportErrorField from './ReportErrorField';
 
 const styles = {
   placeToStay: {
@@ -261,37 +263,19 @@ class ReportError extends Component {
                   shrink: true,
                 }}
               />
-              <TextField
+              <ReportErrorField
                 id="name"
                 name="name"
                 value={name}
                 label="Name"
                 type="text"
-                className={classes.textField}
-                margin="normal"
-                fullWidth
-                variant="outlined"
-                disabled
-                readOnly
-                InputLabelProps={{
-                  shrink: true,
-                }}
               />
-              <TextField
-                id="error-email"
+              <ReportErrorField
+                id="email"
                 name="email"
                 value={email}
                 label="Email"
                 type="email"
-                className={classes.textField}
-                margin="normal"
-                fullWidth
-                variant="outlined"
-                disabled
-                readOnly
-                InputLabelProps={{
-                  shrink: true,
-                }}
               />
               <Button
                 variant="contained"
