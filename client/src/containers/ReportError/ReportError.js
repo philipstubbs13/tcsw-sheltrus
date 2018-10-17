@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// import database
+import { database } from '../../firebase-config';
 // import css
 import './ReportError.css';
 
@@ -42,14 +44,41 @@ const styles = {
 };
 
 class ReportError extends Component {
-  handleChange = name => (event) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorlocation: '',
+      errorDescription: '',
+    };
+
+    this.reportErrorsRef = database.ref('/reporterrors');
+
+  //   this.onChildClick = this.onChildClick.bind(this);
+  }
+
+  handleChange = (event) => {
     this.setState({
-      [name]: event.target.value,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { errorLocation, errorDescription } = this.state;
+    const { uid, email, name } = this.props;
+
+    this.reportErrorsRef.child(uid).push({
+      errorLocation,
+      errorDescription,
+      email,
+      name,
     });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, email, name } = this.props;
+    const { errorLocation, errorDescription } = this.state;
 
     return (
       <div className="page">
@@ -65,8 +94,10 @@ class ReportError extends Component {
             </ul>
             <form className={classes.container}>
               <TextField
-                id="where-is-error"
-                name="error-location"
+                id="errorLocation"
+                name="errorLocation"
+                value={errorLocation}
+                onChange={this.handleChange}
                 margin="normal"
                 variant="outlined"
                 className={classes.textField}
@@ -77,8 +108,10 @@ class ReportError extends Component {
                 }}
               />
               <TextField
-                id="error-description"
-                name="error-description"
+                id="errorDescription"
+                name="errorDescription"
+                value={errorDescription}
+                onChange={this.handleChange}
                 label="Error description"
                 multiline
                 className={classes.textField}
@@ -92,19 +125,44 @@ class ReportError extends Component {
                 }}
               />
               <TextField
+                id="name"
+                name="name"
+                value={name}
+                label="Name"
+                type="text"
+                className={classes.textField}
+                margin="normal"
+                fullWidth
+                variant="outlined"
+                disabled
+                readOnly
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
                 id="error-email"
-                name="error-emai"
-                label="Email (optional)"
+                name="email"
+                value={email}
+                label="Email"
                 type="email"
                 className={classes.textField}
                 margin="normal"
                 fullWidth
                 variant="outlined"
+                disabled
+                readOnly
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
-              <Button variant="contained" color="primary" className="report-error-btn">
+              <Button
+                variant="contained"
+                color="primary"
+                className="report-error-btn"
+                onClick={this.onSubmit}
+                disabled={!errorLocation || !errorDescription}
+              >
                 Report
               </Button>
             </form>

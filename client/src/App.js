@@ -157,7 +157,19 @@ class App extends Component {
                     />
                     <Route exact path="/help" component={Help} />
                     <Route exact path="/shelters" component={Shelters} />
-                    <Route exact path="/error" component={ReportError} />
+                    <Route
+                      exact
+                      path="/error"
+                      render={props => (
+                        <ReportError
+                          {...props}
+                          name={user.displayName}
+                          email={user.email}
+                          photo={user.photoURL}
+                          uid={user.uid}
+                        />
+                      )}
+                    />
                     <Route exact path="/form/:id" component={IntakeForm} />
                     <Route
                       exact
