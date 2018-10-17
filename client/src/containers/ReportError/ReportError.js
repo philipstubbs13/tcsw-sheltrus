@@ -14,6 +14,7 @@ import green from '@material-ui/core/colors/green';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import MenuItem from '@material-ui/core/MenuItem';
 // import database
 import { database } from '../../firebase-config';
 // import css
@@ -47,6 +48,9 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     overflow: 'hidden',
+  },
+  menu: {
+    width: 200,
   },
 };
 
@@ -190,6 +194,7 @@ class ReportError extends Component {
               <TextField
                 id="errorLocation"
                 name="errorLocation"
+                select
                 value={errorLocation}
                 onChange={this.handleChange}
                 margin="normal"
@@ -200,7 +205,31 @@ class ReportError extends Component {
                 InputLabelProps={{
                   shrink: true,
                 }}
-              />
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+              >
+                <MenuItem key="1" value="My profile">
+                  My profile page
+                </MenuItem>
+                <MenuItem key="2" value="Shelters page - LIST VIEW">
+                  Shelters page - LIST VIEW
+                </MenuItem>
+                <MenuItem key="3" value="Shelters page - MAP VIEW">
+                  Shelters page - MAP VIEW
+                </MenuItem>
+                <MenuItem key="4" value="Check in">
+                  Check in page
+                </MenuItem>
+                <MenuItem key="5" value="About">
+                  About page
+                </MenuItem>
+                <MenuItem key="6" value="Help">
+                  Help page
+                </MenuItem>
+              </TextField>
               <TextField
                 id="errorDescription"
                 name="errorDescription"
