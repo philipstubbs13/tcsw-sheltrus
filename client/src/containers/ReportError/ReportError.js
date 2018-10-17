@@ -128,6 +128,33 @@ MySnackbarContent.propTypes = {
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
+const errorLocationList = [
+  {
+    value: 'My profile',
+    label: 'My profile page',
+  },
+  {
+    value: 'Shelters page - LIST VIEW',
+    label: 'Shelters page - LIST VIEW',
+  },
+  {
+    value: 'Shelters page - MAP VIEW',
+    label: 'Shelters page - MAP VIEW',
+  },
+  {
+    value: 'Check in',
+    label: 'Check in page',
+  },
+  {
+    value: 'About',
+    label: 'About page',
+  },
+  {
+    value: 'Help',
+    label: 'Help page',
+  },
+];
+
 class ReportError extends Component {
   constructor(props) {
     super(props);
@@ -211,24 +238,11 @@ class ReportError extends Component {
                   },
                 }}
               >
-                <MenuItem key="1" value="My profile">
-                  My profile page
-                </MenuItem>
-                <MenuItem key="2" value="Shelters page - LIST VIEW">
-                  Shelters page - LIST VIEW
-                </MenuItem>
-                <MenuItem key="3" value="Shelters page - MAP VIEW">
-                  Shelters page - MAP VIEW
-                </MenuItem>
-                <MenuItem key="4" value="Check in">
-                  Check in page
-                </MenuItem>
-                <MenuItem key="5" value="About">
-                  About page
-                </MenuItem>
-                <MenuItem key="6" value="Help">
-                  Help page
-                </MenuItem>
+                {errorLocationList.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
               </TextField>
               <TextField
                 id="errorDescription"
