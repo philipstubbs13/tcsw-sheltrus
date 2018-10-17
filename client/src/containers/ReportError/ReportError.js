@@ -116,19 +116,13 @@ function MySnackbarContent(props) {
 
 MySnackbarContent.propTypes = {
   classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  message: PropTypes.node,
-  onClose: PropTypes.func,
+  className: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
 };
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
-
-const styles2 = theme => ({
-  margin: {
-    margin: theme.spacing.unit,
-  },
-});
 
 class ReportError extends Component {
   constructor(props) {
@@ -140,8 +134,6 @@ class ReportError extends Component {
     };
 
     this.reportErrorsRef = database.ref('/reporterrors');
-
-  //   this.onChildClick = this.onChildClick.bind(this);
   }
 
   handleChange = (event) => {
@@ -163,11 +155,11 @@ class ReportError extends Component {
       name,
     });
 
-    this.setState({ open: true });
-  };
-
-  handleClick = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true,
+      errorLocation: '',
+      errorDescription: '',
+    });
   };
 
   handleClose = (event, reason) => {
@@ -180,7 +172,7 @@ class ReportError extends Component {
 
   render() {
     const { classes, email, name } = this.props;
-    const { errorLocation, errorDescription } = this.state;
+    const { errorLocation, errorDescription, open } = this.state;
 
     return (
       <div className="page">
@@ -272,14 +264,14 @@ class ReportError extends Component {
                   vertical: 'bottom',
                   horizontal: 'left',
                 }}
-                open={this.state.open}
+                open={open}
                 autoHideDuration={6000}
                 onClose={this.handleClose}
               >
                 <MySnackbarContentWrapper
                   onClose={this.handleClose}
                   variant="success"
-                  message="This is a success message!"
+                  message="Thank you for reporting the error!"
                 />
               </Snackbar>
             </form>
@@ -293,6 +285,9 @@ class ReportError extends Component {
 // Check prop types
 ReportError.propTypes = {
   classes: PropTypes.object.isRequired,
+  uid: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 // Export component
