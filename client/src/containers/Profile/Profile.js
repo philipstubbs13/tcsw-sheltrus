@@ -36,45 +36,42 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      avatar: '',
       isUploading: false,
       progress: 0,
-      downloadURL: '',
       uid: props.uid,
+      avatarURL: '',
     };
 
-    this.storageRef = storage.ref('/user-images').child(this.state.uid);
-    this.userRef = database.ref('/users').child(this.state.uid);
+    const { uid } = this.state;
+    this.storageRef = storage.ref('/user-images').child(uid);
+    this.userRef = database.ref('/users').child(uid);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.userRef.child('photoURL'));
+    // console.log(this.userRef.child('photoURL'));
     this.userRef.child('photoURL').on('value', (snapshot) => {
       this.setState({
         avatarURL: snapshot.val(),
       });
     });
-    console.log(this.state.avatarURL);
   }
 
   handleSubmit(event) {
     const { uid } = this.state;
     const file = event.target.files[0];
-    console.log(file.name);
+    // console.log(file.name);
     const uploadTask = this.storageRef.child(file.name)
       .put(file, { contentType: file.type });
 
     uploadTask.on('state_changed', (snapshot) => {
-      console.log(`${snapshot.bytesTransferred / snapshot.totalBytes * 100 }%`);
+      // console.log(`${snapshot.bytesTransferred / snapshot.totalBytes * 100}%`);
     });
 
     uploadTask.then((snapshot) => {
-      // this.userRef.child('photoURL').set(snapshot.downloadURL);
-      console.log(snapshot);
-      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        console.log('File available at', downloadURL);
+      // console.log(snapshot);
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        // console.log('File available at', downloadURL);
         database.ref('/users').child(uid).child('photoURL').set(downloadURL);
       });
     });
@@ -84,9 +81,8 @@ class Profile extends Component {
     const {
       classes,
       name,
-      photo,
-      uid,
     } = this.props;
+    const { isUploading, avatarURL, progress } = this.state;
 
     return (
       <div>
@@ -97,34 +93,13 @@ class Profile extends Component {
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <img
-                src={this.state.avatarURL}
+                src={avatarURL}
                 alt="profile pic"
                 className={classes.profilePic}
               />
               <br />
-              {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-              <label className="select-image-button"
-                style={{
-                  backgroundColor: 'dodgerblue',
-                  color: 'white',
-                  padding: 10,
-                  borderRadius: 4,
-                  pointer: 'cursor',
-                }}
-              >
-                Select an image
-                {/* <FileUploader
-                  hidden
-                  accept="image/*"
-                  name="avatar"
-                  randomizeFilename
-                  storageRef={firebase.storage().ref('images').child(uid)}
-                  onUploadStart={this.handleUploadStart}
-                  onUploadError={this.handleUploadError}
-                  onUploadSuccess={this.handleUploadSuccess}
-                  onProgress={this.handleProgress}
-                /> */}
-              </label>
+              {isUploading && <p>Progress: {progress}</p>}
+
               <input type="file" onChange={this.handleSubmit} accept="image/*" />
               <br />
               <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
@@ -141,7 +116,7 @@ class Profile extends Component {
 // Check prop types
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
-  photo: PropTypes.string.isRequired,
+  uid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 
