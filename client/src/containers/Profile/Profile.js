@@ -42,9 +42,13 @@ class Profile extends Component {
       isUploading: false,
       progress: 0,
       avatarURL: '',
+      uid: props.uid,
     };
+    console.log(this.state.uid);
 
-    this.storageRef = storage.ref('/user-images').child(props.uid);
+    this.storageRef = storage.ref('/user-images').child(this.state.uid);
+    this.userRef = database.ref('/users').child(this.state.uid);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChangeUsername = event =>
@@ -60,18 +64,71 @@ class Profile extends Component {
   };
 
   handleUploadSuccess = (filename) => {
-    this.setState({ avatar: filename, progress: 100, isUploading: false });
-    firebase
-      .storage()
-      .ref('images')
-      .child(filename)
-      .getDownloadURL()
-      .then(url => this.setState({ avatarURL: url }));
+    console.log("handle upload success");
+    // const file = event.target.files[0];
+		console.log(filename);
+		const uploadTask = this.storageRef.child(filename)
+			.put(filename);
+
+		// uploadTask.on('state_changed', (snapshot) => {
+		// 	console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
+		// });
+
+		uploadTask.then((snapshot) => {
+			this.userRef.child('photoURL').set(snapshot.downloadURL);
+		})
+    // this.setState({ avatar: filename, progress: 100, isUploading: false });
+    // firebase
+    //   .storage()
+    //   .ref('images')
+    //   .child(filename)
+    //   .getDownloadURL()
+    //   .then(url => this.setState({ avatarURL: url }));
+    // const uploadTask = this.storageRef.child(filename)
+    //   .put(filename);
+    // this.userRef.child('photoURL').set(filename);
+
+    // this.userRef.child('photoURL').on('value', (snapshot) => {
+		// 	this.setState({
+		// 		avatarURL: snapshot.val()
+		// 	});
+		// });
+
+    // uploadTask.on('state_changed', (snapshot) => {
+    //   console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
+    // });
+
+    // uploadTask.then((snapshot) => {
+    //   this.userRef.child('photoURL').set(snapshot.downloadURL);
+    // });
   };
+
+  handleSubmit(event) {
+		const file = event.target.files[0];
+		console.log(file.name);
+		const uploadTask = this.storageRef.child(file.name)
+			.put(file, { contentType: file.type });
+
+		uploadTask.on('state_changed', (snapshot) => {
+			console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
+		});
+
+		uploadTask.then((snapshot) => {
+			this.userRef.child('photoURL').set(snapshot.downloadURL);
+		})
+	}
+
+  componentDidMount() {
+    this.userRef.child('photoURL').on('value', (snapshot) => {
+      this.setState({
+        avatarURL: snapshot.val(),
+      });
+    });
+    console.log(this.state.avatarURL);
+  }
 
   render() {
     const { classes, name, photo, uid } = this.props;
-    // console.log(this.props);
 
     return (
       <div>
@@ -97,7 +154,7 @@ class Profile extends Component {
               }}
               >
                 Select an image
-                <FileUploader
+                {/* <FileUploader
                   hidden
                   accept="image/*"
                   name="avatar"
@@ -107,8 +164,9 @@ class Profile extends Component {
                   onUploadError={this.handleUploadError}
                   onUploadSuccess={this.handleUploadSuccess}
                   onProgress={this.handleProgress}
-                />
+                /> */}
               </label>
+              <input type="file" onChange={this.handleSubmit} />
               <br />
               <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
                 I need a place to stay
