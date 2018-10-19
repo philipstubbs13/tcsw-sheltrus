@@ -30,6 +30,11 @@ const styles = {
   placeToStay: {
     marginTop: 10,
   },
+  button: {
+    marginTop: 25,
+    marginBottom: 25,
+    padding: '1rem',
+  },
 };
 
 class Profile extends Component {
@@ -99,8 +104,19 @@ class Profile extends Component {
               />
               <br />
               {isUploading && <p>Progress: {progress}</p>}
-
-              <input type="file" onChange={this.handleSubmit} accept="image/*" />
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="outlined-button-file"
+                type="file"
+                onChange={this.handleSubmit}
+                hidden
+              />
+              <label htmlFor="outlined-button-file">
+                <Button variant="outlined" component="span" className={classes.button} fullWidth>
+                  Upload photo
+                </Button>
+              </label>
               <br />
               <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
                 I need a place to stay
