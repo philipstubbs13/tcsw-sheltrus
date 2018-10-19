@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 // import SimpleNavBar
 import SimpleNavBar from '../../components/SimpleNavBar';
 // import CSS
-import './Login.css';
+import './Signup.css';
 
 // CSS in JS
 const styles = {
@@ -38,7 +38,7 @@ const styles = {
   },
 };
 
-class Login extends Component {
+class Signup extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
@@ -106,7 +106,7 @@ class Login extends Component {
               </Button>
             </Grid>
             <Grid item className={classes.placeToStay} id="signup-btn">
-              <Button variant="contained" color="primary" className="login-button" component={Link} to="/signup">
+              <Button variant="contained" color="primary" className="login-button" component={Link} to="/sigup">
                 Sign up
               </Button>
             </Grid>
@@ -128,7 +128,7 @@ class Login extends Component {
 }
 
 // Check prop types
-Login.propTypes = {
+Signup.propTypes = {
   classes: PropTypes.object.isRequired,
   handleLogin: PropTypes.func.isRequired,
   username: PropTypes.string,
@@ -136,10 +136,10 @@ Login.propTypes = {
 };
 
 // Default prop types
-Login.defaultProps = {
+Signup.defaultProps = {
   username: '',
   password: '',
 };
 
 // Export component
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Signup);

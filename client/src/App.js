@@ -19,6 +19,7 @@ import Help from './containers/Help';
 import IntakeForm from './containers/IntakeForm';
 import Ticket from './containers/Ticket';
 import Login from './containers/Login';
+import Signup from './containers/Signup';
 import About from './containers/About';
 import ReportError from './containers/ReportError';
 // import Footer component
@@ -193,7 +194,32 @@ class App extends Component {
                 // If the user is not authenticated,
                 // only show the login page and block all other routes.
                 <div>
-                  <Login handleLogin={this.login} username={username} password={password} />
+                  <Switch>
+                    <Route
+                      exact
+                      path="/"
+                      render={props => (
+                        <Login
+                          {...props}
+                          handleLogin={this.login}
+                          username={username} 
+                          password={password}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/signup"
+                      render={props => (
+                        <Signup
+                          {...props}
+                          handleLogin={this.login}
+                          username={username} 
+                          password={password}
+                        />
+                      )}
+                    />
+                  </Switch>
                 </div>
               )}
             <Footer />
