@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import firebase from 'firebase';
 import { storage, database } from '../../firebase-config';
 // import css
 import './Profile.css';
@@ -112,7 +111,7 @@ class Profile extends Component {
                 onChange={this.handleSubmit}
                 hidden
               />
-              <label htmlFor="outlined-button-file">
+              <label id="upload-photo" htmlFor="outlined-button-file">
                 <Button variant="outlined" component="span" className={classes.button} fullWidth>
                   Upload photo
                 </Button>

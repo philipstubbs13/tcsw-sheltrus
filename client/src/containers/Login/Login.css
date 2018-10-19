@@ -4,6 +4,10 @@
   border: 1px solid black;
 }
 
+#signup-btn {
+  margin-left: 30px;
+}
+
 /* Google */
 .loginBtn--google {
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/

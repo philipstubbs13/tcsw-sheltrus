@@ -98,10 +98,21 @@ class Login extends Component {
                 }}
               />
             </Grid>
-            <Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
-              <Button variant="contained" color="primary" className="login-button" fullWidth component={Link} to="/profile">
+          </Grid>
+          <Grid container direction="row" justify="center" spacing={16} className="page-container">
+            <Grid item className={classes.placeToStay} id="login-btn">
+              <Button variant="contained" color="primary" className="login-button" component={Link} to="/profile">
                 Login
               </Button>
+            </Grid>
+            <Grid item className={classes.placeToStay} id="signup-btn">
+              <Button variant="contained" color="primary" className="login-button" component={Link} to="/sigup">
+                Sign up
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container direction="column" justify="center" spacing={16} className="page-container">
+            <Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
               <div className={classes.loginGoogleInfo}>
                 <p>OR Login with Google to use the app.</p>
                 <button type="submit" className="loginBtn loginBtn--google" onClick={handleLogin}>
