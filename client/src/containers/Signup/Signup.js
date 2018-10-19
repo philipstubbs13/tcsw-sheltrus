@@ -63,18 +63,19 @@ class Signup extends Component {
                 Find or check in at a nearby shelter.
               </Typography>
               <Typography variant="h6" className={classes.loginPageInfo}>
-                Enter your username and password to LOGIN.
+                Provide an email address and password to SIGN UP.
               </Typography>
               <br />
               <TextField
-                id="login-username"
+                id="signup-email"
                 className={classes.textField}
-                label="Username"
+                label="Email"
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
                 name="username"
                 value={username}
+                type="email"
                 variant="outlined"
                 onChange={this.onChange}
                 InputLabelProps={{
@@ -82,7 +83,7 @@ class Signup extends Component {
                 }}
               />
               <TextField
-                id="login-password"
+                id="signup-password"
                 className={classes.textField}
                 label="Password"
                 style={{ margin: 8 }}
@@ -100,11 +101,6 @@ class Signup extends Component {
             </Grid>
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">
-            <Grid item className={classes.placeToStay} id="login-btn">
-              <Button variant="contained" color="primary" className="login-button" component={Link} to="/profile">
-                Login
-              </Button>
-            </Grid>
             <Grid item className={classes.placeToStay} id="signup-btn">
               <Button variant="contained" color="primary" className="login-button" component={Link} to="/sigup">
                 Sign up
@@ -114,10 +110,9 @@ class Signup extends Component {
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
             <Grid item xs={12} sm={12} md={12} className={classes.placeToStay}>
               <div className={classes.loginGoogleInfo}>
-                <p>OR Login with Google to use the app.</p>
-                <button type="submit" className="loginBtn loginBtn--google" onClick={handleLogin}>
-                  Login with Google
-                </button>
+                <Button variant="contained" color="primary" className="login-button" component={Link} to="/">
+                  Already set up an account? Go back and LOGIN
+                </Button>
               </div>
             </Grid>
           </Grid>
