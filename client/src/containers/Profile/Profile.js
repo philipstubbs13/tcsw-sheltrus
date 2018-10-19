@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import FileUploader from 'react-firebase-file-uploader';
 import firebase from 'firebase';
 import { storage, database } from '../../firebase-config';
 // import css
@@ -41,84 +40,17 @@ class Profile extends Component {
       avatar: '',
       isUploading: false,
       progress: 0,
-      avatarURL: '',
+      downloadURL: '',
       uid: props.uid,
     };
-    console.log(this.state.uid);
 
     this.storageRef = storage.ref('/user-images').child(this.state.uid);
     this.userRef = database.ref('/users').child(this.state.uid);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeUsername = event =>
-    this.setState({ username: event.target.value });
-
-  handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
-
-  handleProgress = progress => this.setState({ progress });
-
-  handleUploadError = (error) => {
-    this.setState({ isUploading: false });
-    console.error(error);
-  };
-
-  handleUploadSuccess = (filename) => {
-    console.log("handle upload success");
-    // const file = event.target.files[0];
-		console.log(filename);
-		const uploadTask = this.storageRef.child(filename)
-			.put(filename);
-
-		// uploadTask.on('state_changed', (snapshot) => {
-		// 	console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
-		// });
-
-		uploadTask.then((snapshot) => {
-			this.userRef.child('photoURL').set(snapshot.downloadURL);
-		})
-    // this.setState({ avatar: filename, progress: 100, isUploading: false });
-    // firebase
-    //   .storage()
-    //   .ref('images')
-    //   .child(filename)
-    //   .getDownloadURL()
-    //   .then(url => this.setState({ avatarURL: url }));
-    // const uploadTask = this.storageRef.child(filename)
-    //   .put(filename);
-    // this.userRef.child('photoURL').set(filename);
-
-    // this.userRef.child('photoURL').on('value', (snapshot) => {
-		// 	this.setState({
-		// 		avatarURL: snapshot.val()
-		// 	});
-		// });
-
-    // uploadTask.on('state_changed', (snapshot) => {
-    //   console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
-    // });
-
-    // uploadTask.then((snapshot) => {
-    //   this.userRef.child('photoURL').set(snapshot.downloadURL);
-    // });
-  };
-
-  handleSubmit(event) {
-		const file = event.target.files[0];
-		console.log(file.name);
-		const uploadTask = this.storageRef.child(file.name)
-			.put(file, { contentType: file.type });
-
-		uploadTask.on('state_changed', (snapshot) => {
-			console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
-		});
-
-		uploadTask.then((snapshot) => {
-			this.userRef.child('photoURL').set(snapshot.downloadURL);
-		})
-	}
-
   componentDidMount() {
+    console.log(this.userRef.child('photoURL'));
     this.userRef.child('photoURL').on('value', (snapshot) => {
       this.setState({
         avatarURL: snapshot.val(),
@@ -127,8 +59,34 @@ class Profile extends Component {
     console.log(this.state.avatarURL);
   }
 
+  handleSubmit(event) {
+    const { uid } = this.state;
+    const file = event.target.files[0];
+    console.log(file.name);
+    const uploadTask = this.storageRef.child(file.name)
+      .put(file, { contentType: file.type });
+
+    uploadTask.on('state_changed', (snapshot) => {
+      console.log(`${snapshot.bytesTransferred / snapshot.totalBytes * 100 }%`);
+    });
+
+    uploadTask.then((snapshot) => {
+      // this.userRef.child('photoURL').set(snapshot.downloadURL);
+      console.log(snapshot);
+      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        console.log('File available at', downloadURL);
+        database.ref('/users').child(uid).child('photoURL').set(downloadURL);
+      });
+    });
+  }
+
   render() {
-    const { classes, name, photo, uid } = this.props;
+    const {
+      classes,
+      name,
+      photo,
+      uid,
+    } = this.props;
 
     return (
       <div>
@@ -145,13 +103,14 @@ class Profile extends Component {
               />
               <br />
               {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-              <label className="select-image-button" style={{
-                backgroundColor: 'dodgerblue',
-                color: 'white',
-                padding: 10,
-                borderRadius: 4,
-                pointer: 'cursor',
-              }}
+              <label className="select-image-button"
+                style={{
+                  backgroundColor: 'dodgerblue',
+                  color: 'white',
+                  padding: 10,
+                  borderRadius: 4,
+                  pointer: 'cursor',
+                }}
               >
                 Select an image
                 {/* <FileUploader
@@ -166,7 +125,7 @@ class Profile extends Component {
                   onProgress={this.handleProgress}
                 /> */}
               </label>
-              <input type="file" onChange={this.handleSubmit} />
+              <input type="file" onChange={this.handleSubmit} accept="image/*" />
               <br />
               <Button variant="contained" color="primary" className="need-place-button" fullWidth component={Link} to="/shelters">
                 I need a place to stay
