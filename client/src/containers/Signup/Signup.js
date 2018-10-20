@@ -137,7 +137,11 @@ class Signup extends Component {
 // Check prop types
 Signup.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleLogin: PropTypes.func.isRequired,
+  userEmail: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  signUpError: PropTypes.string,
+  signUpErrorDetails: PropTypes.string,
   username: PropTypes.string,
   password: PropTypes.string,
 };
@@ -146,6 +150,8 @@ Signup.propTypes = {
 Signup.defaultProps = {
   username: '',
   password: '',
+  signUpError: '',
+  signUpErrorDetails: '',
 };
 
 // Export component

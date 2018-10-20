@@ -94,204 +94,208 @@ class App extends Component {
     });
   }
 
-  // Handles authentication with firebase.
-  // Here we call the signInWithPopup method from the auth module,
-  // and pass in our provider (remember this refers to the Google Auth Provider).
-  // Now, when you click the 'login' button, it will trigger a popup
-  // that gives us the option to sign in with a Google account
-  // signInWithPopup has a promise API that allows us to call
-  // .then on it and pass in a callback.
-  // This callback will be provided with a result object that contains,
-  // among other things, a property called .user that has all the
-  // information about the user who has just successfully signed in
-  // including their name and user photo. We then store this inside of the state using setState.
-  login() {
-    auth.signInWithPopup(provider)
-      .then((result) => {
-        // console.log(result);
-        const user = result.user;
+    onSubmit = (e) => {
+      e.preventDefault();
+
+      const {
+        userEmail,
+        password,
+        signUpError,
+        SignUpErrorDetails,
+      } = this.state;
+
+      if (userEmail === '') {
         this.setState({
-          user,
+          signUpError: 'Email address is required.',
         });
-      });
-  }
-
-  // We call the signOut method on auth,
-  // and then using the Promise API
-  // we remove the user from our application's state.
-  // With this.state.user now equal to null,
-  // the user will see the Log In button instead of the Log Out button.
-  logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null,
-        });
-      });
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  onSubmit = (e) => {
-    e.preventDefault();
-
-    const { userEmail, password, signUpError, SignUpErrorDetails } = this.state;
-
-    if (userEmail === '') {
-      this.setState({
-        signUpError: 'Email address is required.',
-      });
-      return;
-    }
-
-    if (password === '') {
-      this.setState({
-        signUpError: 'Password is required.',
-      });
-      return;
-    }
-
-    // Register with firebase.
-    // Register a new user
-    firebase.auth().createUserWithEmailAndPassword(userEmail, password).catch((error) => {
-      // Handle Errors here.
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-      if (errorCode === 'auth/invalid-email') {
-        this.setState({
-          signUpError: 'The email address entered is not valid.',
-          signUpErrorDetails: 'Use the following format: someone@example.com.',
-        });
-      } else {
-        this.setState({
-          signUpError: errorMessage,
-          signUpErrorDetails: '',
-        });
+        return;
       }
-    });
-  };
 
+      if (password === '') {
+        this.setState({
+          signUpError: 'Password is required.',
+        });
+        return;
+      }
 
-  render() {
-    // ES6 destructuring
-    const {
-      user,
-      username,
-      userEmail,
-      password,
-      signUpError,
-      signUpErrorDetails,
-    } = this.state;
-    // const { classes } = this.props;
-    // console.log(user);
+      // Register with firebase.
+      // Register a new user
+      firebase.auth().createUserWithEmailAndPassword(userEmail, password).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // console.log(errorCode);
+        // console.log(errorMessage);
+        if (errorCode === 'auth/invalid-email') {
+          this.setState({
+            signUpError: 'The email address entered is not valid.',
+            signUpErrorDetails: 'Use the following format: someone@example.com.',
+          });
+        } else {
+          this.setState({
+            signUpError: errorMessage,
+            signUpErrorDetails: '',
+          });
+        }
+      });
+    };
 
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <div className="app-pages">
-            {/* If the user is authenticated, make all routes available to the user. */}
-            {user
-              ? (
-                <div>
-                  <NavBar handleLogout={this.logout} />
-                  <Tabs />
-                  <Switch>
-                    <Route
-                      exact
-                      path="/"
-                      render={props => (
-                        <Profile
-                          {...props}
-                          name={user.displayName}
-                          email={user.email}
-                          photo={user.photoURL}
-                          uid={user.uid}
+      handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value,
+        });
+      };
+
+      // Handles authentication with firebase.
+      // Here we call the signInWithPopup method from the auth module,
+      // and pass in our provider (remember this refers to the Google Auth Provider).
+      // Now, when you click the 'login' button, it will trigger a popup
+      // that gives us the option to sign in with a Google account
+      // signInWithPopup has a promise API that allows us to call
+      // .then on it and pass in a callback.
+      // This callback will be provided with a result object that contains,
+      // among other things, a property called .user that has all the
+      // information about the user who has just successfully signed in
+      // including their name and user photo. We then store this inside of the state using setState.
+      login() {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            // console.log(result);
+            const user = result.user;
+            this.setState({
+              user,
+            });
+          });
+      }
+
+      // We call the signOut method on auth,
+      // and then using the Promise API
+      // we remove the user from our application's state.
+      // With this.state.user now equal to null,
+      // the user will see the Log In button instead of the Log Out button.
+      logout() {
+        auth.signOut()
+          .then(() => {
+            this.setState({
+              user: null,
+            });
+          });
+      }
+
+      render() {
+        // ES6 destructuring
+        const {
+          user,
+          username,
+          userEmail,
+          password,
+          signUpError,
+          signUpErrorDetails,
+        } = this.state;
+        // const { classes } = this.props;
+        // console.log(user);
+
+        return (
+          <div className="App">
+            <BrowserRouter>
+              <div className="app-pages">
+                {/* If the user is authenticated, make all routes available to the user. */}
+                {user
+                  ? (
+                    <div>
+                      <NavBar handleLogout={this.logout} />
+                      <Tabs />
+                      <Switch>
+                        <Route
+                          exact
+                          path="/"
+                          render={props => (
+                            <Profile
+                              {...props}
+                              name={user.displayName}
+                              email={user.email}
+                              photo={user.photoURL}
+                              uid={user.uid}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Route exact path="/help" component={Help} />
-                    <Route exact path="/shelters" component={Shelters} />
-                    <Route
-                      exact
-                      path="/error"
-                      render={props => (
-                        <ReportError
-                          {...props}
-                          name={user.displayName}
-                          email={user.email}
-                          photo={user.photoURL}
-                          uid={user.uid}
+                        <Route exact path="/help" component={Help} />
+                        <Route exact path="/shelters" component={Shelters} />
+                        <Route
+                          exact
+                          path="/error"
+                          render={props => (
+                            <ReportError
+                              {...props}
+                              name={user.displayName}
+                              email={user.email}
+                              photo={user.photoURL}
+                              uid={user.uid}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Route exact path="/form/:id" component={IntakeForm} />
-                    <Route
-                      exact
-                      path="/ticket"
-                      render={props => (
-                        <Ticket
-                          {...props}
-                          name={user.displayName}
-                          email={user.email}
-                          photo={user.photoURL}
-                          uid={user.uid}
+                        <Route exact path="/form/:id" component={IntakeForm} />
+                        <Route
+                          exact
+                          path="/ticket"
+                          render={props => (
+                            <Ticket
+                              {...props}
+                              name={user.displayName}
+                              email={user.email}
+                              photo={user.photoURL}
+                              uid={user.uid}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Route exact path="/map" component={Map} />
-                    <Route exact path="/about" component={About} />
-                  </Switch>
-                </div>
-              )
-              : (
-                // If the user is not authenticated,
-                // only show the login page and block all other routes.
-                <div>
-                  <Switch>
-                    <Route
-                      exact
-                      path="/"
-                      render={props => (
-                        <Login
-                          {...props}
-                          handleLogin={this.login}
-                          username={username}
-                          password={password}
+                        <Route exact path="/map" component={Map} />
+                        <Route exact path="/about" component={About} />
+                      </Switch>
+                    </div>
+                  )
+                  : (
+                    // If the user is not authenticated,
+                    // only show the login page and block all other routes.
+                    <div>
+                      <Switch>
+                        <Route
+                          exact
+                          path="/"
+                          render={props => (
+                            <Login
+                              {...props}
+                              handleLogin={this.login}
+                              username={username}
+                              password={password}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <Route
-                      exact
-                      path="/signup"
-                      render={props => (
-                        <Signup
-                          {...props}
-                          handleLogin={this.login}
-                          username={username}
-                          userEmail={userEmail}
-                          password={password}
-                          onChange={this.handleChange}
-                          onSubmit={this.onSubmit}
-                          signUpError={signUpError}
-                          signUpErrorDetails={signUpErrorDetails}
+                        <Route
+                          exact
+                          path="/signup"
+                          render={props => (
+                            <Signup
+                              {...props}
+                              handleLogin={this.login}
+                              username={username}
+                              userEmail={userEmail}
+                              password={password}
+                              onChange={this.handleChange}
+                              onSubmit={this.onSubmit}
+                              signUpError={signUpError}
+                              signUpErrorDetails={signUpErrorDetails}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                  </Switch>
-                </div>
-              )}
-            <Footer />
+                      </Switch>
+                    </div>
+                  )}
+                <Footer />
+              </div>
+            </BrowserRouter>
           </div>
-        </BrowserRouter>
-      </div>
-    );
-  }
+        );
+      }
 }
 
 // Export the App component so that it can picked up and rendered from the index.js file.
