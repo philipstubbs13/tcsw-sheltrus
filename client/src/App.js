@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 // Import Lodash
 import pick from 'lodash/pick';
 // Import app pages
+import firebase from 'firebase';
 import Profile from './containers/Profile';
 import Shelters from './containers/Shelters';
 import Map from './containers/Map';
@@ -58,6 +59,7 @@ class App extends Component {
     this.state = {
       user: null,
       username: '',
+      userEmail: '',
       password: '',
       users: {},
     };
@@ -126,9 +128,37 @@ class App extends Component {
       });
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { userEmail, password } = this.state;
+
+    // Register with firebase.
+    // Register a new user
+    firebase.auth().createUserWithEmailAndPassword(userEmail, password).catch((error) => {
+      // Handle Errors here.
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
+  };
+
+
   render() {
     // ES6 destructuring
-    const { user, username, password } = this.state;
+    const {
+      user,
+      username,
+      userEmail,
+      password,
+    } = this.state;
     // const { classes } = this.props;
     // console.log(user);
 
@@ -202,7 +232,7 @@ class App extends Component {
                         <Login
                           {...props}
                           handleLogin={this.login}
-                          username={username} 
+                          username={username}
                           password={password}
                         />
                       )}
@@ -214,8 +244,11 @@ class App extends Component {
                         <Signup
                           {...props}
                           handleLogin={this.login}
-                          username={username} 
+                          username={username}
+                          userEmail={userEmail}
                           password={password}
+                          onChange={this.handleChange}
+                          onSubmit={this.onSubmit}
                         />
                       )}
                     />

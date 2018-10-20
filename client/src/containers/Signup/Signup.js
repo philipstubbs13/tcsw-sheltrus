@@ -39,15 +39,15 @@ const styles = {
 };
 
 class Signup extends Component {
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
   render() {
     // ES6 destructuring
     const {
       classes,
-      handleLogin,
       username,
+      userEmail,
       password,
+      onChange,
+      onSubmit,
     } = this.props;
 
     return (
@@ -67,17 +67,17 @@ class Signup extends Component {
               </Typography>
               <br />
               <TextField
-                id="signup-email"
+                id="userEmail"
                 className={classes.textField}
                 label="Email"
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
-                name="username"
-                value={username}
+                name="userEmail"
+                value={userEmail}
                 type="email"
                 variant="outlined"
-                onChange={this.onChange}
+                onChange={onChange}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -91,7 +91,7 @@ class Signup extends Component {
                 name="password"
                 type="password"
                 margin="normal"
-                onChange={this.onChange}
+                onChange={onChange}
                 value={password}
                 variant="outlined"
                 InputLabelProps={{
@@ -102,7 +102,7 @@ class Signup extends Component {
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">
             <Grid item className={classes.placeToStay} id="signup-btn">
-              <Button variant="contained" color="primary" className="login-button" component={Link} to="/sigup">
+              <Button variant="contained" color="primary" className="login-button" onClick={onSubmit}>
                 Sign up
               </Button>
             </Grid>
