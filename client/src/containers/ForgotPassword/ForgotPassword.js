@@ -9,9 +9,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+// Import firebase
 import firebase from 'firebase';
 // import SimpleNavBar
 import SimpleNavBar from '../../components/SimpleNavBar';
+// import SnackbarMessage component
+import SnackbarMessage from '../../components/SnackbarMessage';
 
 // CSS in JS
 const styles = {
@@ -48,6 +52,7 @@ class ForgotPassword extends Component {
       userEmail: '',
       forgotPasswordError: '',
       forgotPasswordErrorDetails: '',
+      open: false,
     };
   }
 
@@ -56,7 +61,12 @@ class ForgotPassword extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { userEmail, forgotPasswordError, forgotPasswordErrorDetails } = this.state;
+    const {
+      userEmail,
+      forgotPasswordError,
+      forgotPasswordErrorDetails,
+      open,
+    } = this.state;
 
     if (userEmail === '') {
       this.setState({
@@ -93,13 +103,27 @@ class ForgotPassword extends Component {
       userEmail: '',
       forgotPasswordError: '',
       forgotPasswordErrorDetails: '',
+      open: true,
     });
   }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
 
   render() {
     // ES6 destructuring
     const { classes } = this.props;
-    const { userEmail, forgotPasswordError, forgotPasswordErrorDetails } = this.state;
+    const {
+      userEmail,
+      forgotPasswordError,
+      forgotPasswordErrorDetails,
+      open,
+    } = this.state;
 
     return (
       <div>
@@ -144,6 +168,21 @@ class ForgotPassword extends Component {
               <Button variant="contained" color="primary" className="login-button" onClick={this.onSubmit}>
                 Reset Password
               </Button>
+              <Snackbar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={this.handleClose}
+              >
+                <SnackbarMessage
+                  onClose={this.handleClose}
+                  variant="success"
+                  message="Check your email. Instructions to reset your password have been sent to your email."
+                />
+              </Snackbar>
             </Grid>
           </Grid>
           <Grid container direction="column" justify="center" spacing={16} className="page-container">
