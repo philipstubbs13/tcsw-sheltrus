@@ -46,6 +46,7 @@ class Signup extends Component {
   componentDidMount() {
     console.log(this.props);
   }
+
   render() {
     // ES6 destructuring
     const {

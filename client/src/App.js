@@ -7,11 +7,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {
-  createBrowserHistory,
-  createHashHistory,
-  createMemoryHistory
-} from 'history';
 // Import Material UI components and styling.
 import { withStyles } from '@material-ui/core/styles';
 // Import Lodash
@@ -96,6 +91,12 @@ class App extends Component {
         });
         console.log(user);
       }
+      this.setState({
+        signUpError: '',
+        signUpErrorDetails: '',
+        userEmail: '',
+        password: '',
+      });
     });
   }
 
@@ -142,7 +143,6 @@ class App extends Component {
             signUpErrorDetails: '',
           });
         }
-        this.signIn();
       });
       // this.props.history.push('/');
     };
@@ -154,12 +154,56 @@ class App extends Component {
       };
 
       signIn = () => {
-        const { userEmail, password } = this.state;
+        const {
+          userEmail,
+          password,
+          signUpError,
+          signUpErrorDetails,
+        } = this.state;
+
+        if (userEmail === '') {
+          this.setState({
+            signUpError: 'Email address is required.',
+            signUpErrorDetails: '',
+          });
+          return;
+        }
+
+        if (password === '') {
+          this.setState({
+            signUpError: 'Password is required.',
+            signUpErrorDetails: '',
+          });
+          return;
+        }
         // Sign in existing user
         firebase.auth().signInWithEmailAndPassword(userEmail, password)
           .catch((err) => {
             // Handle errors
             console.log(err);
+            if (err.code === 'auth/invalid-email') {
+              this.setState({
+                signUpError: 'The email address entered is not valid.',
+                signUpErrorDetails: 'Use the following format: someone@example.com.',
+              });
+              return;
+            }
+
+            if (err.code === 'auth/user-not-found') {
+              this.setState({
+                signUpError: 'There is no user record corresponding to this email.',
+                signUpErrorDetails: 'The user might have been deleted or does not exist.',
+              });
+              return;
+            }
+
+            if (err.code === 'auth/wrong-password') {
+              this.setState({
+                signUpError: 'Password is not correct.',
+                signUpErrorDetails: 'Verify that you entered your password correctly.',
+              });
+              return;
+            }
           });
       }
 
@@ -287,6 +331,8 @@ class App extends Component {
                               userEmail={userEmail}
                               onChange={this.handleChange}
                               password={password}
+                              signUpError={signUpError}
+                              signUpErrorDetails={signUpErrorDetails}
                             />
                           )}
                         />

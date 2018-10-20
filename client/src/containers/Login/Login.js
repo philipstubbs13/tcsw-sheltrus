@@ -36,6 +36,10 @@ const styles = {
     fontSize: 20,
     marginTop: 20,
   },
+  signUpError: {
+    color: 'var(--form-error-color)',
+    textAlign: 'center',
+  },
 };
 
 class Login extends Component {
@@ -51,6 +55,8 @@ class Login extends Component {
       userEmail,
       username,
       password,
+      signUpError,
+      signUpErrorDetails,
     } = this.props;
 
     return (
@@ -66,7 +72,7 @@ class Login extends Component {
                 Find or check in at a nearby shelter.
               </Typography>
               <Typography variant="h6" className={classes.loginPageInfo}>
-                Enter your username and password to LOGIN.
+                Enter your email and password to LOGIN.
               </Typography>
               <br />
               <TextField
@@ -100,6 +106,12 @@ class Login extends Component {
                   shrink: true,
                 }}
               />
+              <Typography variant="h6" className={classes.signUpError}>
+                {signUpError}
+              </Typography>
+              <Typography variant="h6" className={classes.signUpError}>
+                {signUpErrorDetails}
+              </Typography>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">
