@@ -23,6 +23,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import About from './containers/About';
 import ReportError from './containers/ReportError';
+import ForgotPassword from './containers/ForgotPassword';
 // import Footer component
 import Footer from './components/Footer';
 // Import NavBar component (when user is authenticated)
@@ -91,7 +92,7 @@ class App extends Component {
         this.usersRef.once('value', (snapshot) => {
           this.setState({ users: snapshot.val() });
         });
-        console.log(user);
+        // console.log(user);
       }
       this.setState({
         signUpError: '',
@@ -112,8 +113,6 @@ class App extends Component {
         password,
         signUpError,
         SignUpErrorDetails,
-        loginError,
-        loginErrorDetails,
       } = this.state;
 
       if (userEmail === '') {
@@ -186,7 +185,7 @@ class App extends Component {
         firebase.auth().signInWithEmailAndPassword(userEmail, password)
           .catch((err) => {
             // Handle errors
-            console.log(err);
+            // console.log(err);
             if (err.code === 'auth/invalid-email') {
               this.setState({
                 loginError: 'The email address entered is not valid.',
@@ -359,6 +358,7 @@ class App extends Component {
                             />
                           )}
                         />
+                        <Route exact path="/forgotpassword" component={ForgotPassword} />
                       </Switch>
                     </div>
                   )}

@@ -79,7 +79,6 @@ class Login extends Component {
                 id="login-email"
                 className={classes.textField}
                 label="Email"
-                style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
                 name="userEmail"
@@ -94,7 +93,6 @@ class Login extends Component {
                 id="login-password"
                 className={classes.textField}
                 label="Password"
-                style={{ margin: 8 }}
                 fullWidth
                 name="password"
                 type="password"
@@ -106,6 +104,7 @@ class Login extends Component {
                   shrink: true,
                 }}
               />
+              <a href="/forgotpassword">Forgot Password?</a>
               <Typography variant="h6" className={classes.signUpError}>
                 {loginError}
               </Typography>
