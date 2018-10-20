@@ -92,6 +92,9 @@ class Tabs extends React.Component {
                 <ListItem className={classes.menuItem} component={Link} to="/error">
                   Report error
                 </ListItem>
+                <ListItem className={classes.menuItem} component={Link} to="/deleteaccount">
+                  Delete account
+                </ListItem>
               </List>
             </div>
           </div>

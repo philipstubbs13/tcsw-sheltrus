@@ -24,6 +24,7 @@ import Signup from './containers/Signup';
 import About from './containers/About';
 import ReportError from './containers/ReportError';
 import ForgotPassword from './containers/ForgotPassword';
+import DeleteAccount from './containers/DeleteAccount';
 // import Footer component
 import Footer from './components/Footer';
 // Import NavBar component (when user is authenticated)
@@ -316,6 +317,18 @@ class App extends Component {
                         />
                         <Route exact path="/map" component={Map} />
                         <Route exact path="/about" component={About} />
+                        <Route
+                          exact
+                          path="/deleteaccount"
+                          render={props => (
+                            <DeleteAccount
+                              {...props}
+                              name={user.displayName}
+                              email={user.email}
+                              uid={user.uid}
+                            />
+                          )}
+                        />
                       </Switch>
                     </div>
                   )

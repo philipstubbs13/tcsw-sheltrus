@@ -81,6 +81,12 @@ class ForgotPassword extends Component {
 
     auth.sendPasswordResetEmail(emailAddress).then(() => {
       // Email sent.
+      this.setState({
+        userEmail: '',
+        forgotPasswordError: '',
+        forgotPasswordErrorDetails: '',
+        open: true,
+      });
     }).catch((error) => {
       // An error happened.
       // console.log(error);
@@ -98,12 +104,6 @@ class ForgotPassword extends Component {
           forgotPasswordErrorDetails: 'The user might have been deleted or does not exist.',
         });
       }
-    });
-    this.setState({
-      userEmail: '',
-      forgotPasswordError: '',
-      forgotPasswordErrorDetails: '',
-      open: true,
     });
   }
 
