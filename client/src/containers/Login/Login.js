@@ -55,8 +55,8 @@ class Login extends Component {
       userEmail,
       username,
       password,
-      signUpError,
-      signUpErrorDetails,
+      loginError,
+      loginErrorDetails,
     } = this.props;
 
     return (
@@ -107,10 +107,10 @@ class Login extends Component {
                 }}
               />
               <Typography variant="h6" className={classes.signUpError}>
-                {signUpError}
+                {loginError}
               </Typography>
               <Typography variant="h6" className={classes.signUpError}>
-                {signUpErrorDetails}
+                {loginErrorDetails}
               </Typography>
             </Grid>
           </Grid>
@@ -146,6 +146,11 @@ class Login extends Component {
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  handleSignIn: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  userEmail: PropTypes.string,
+  loginError: PropTypes.string,
+  loginErrorDetails: PropTypes.string,
   username: PropTypes.string,
   password: PropTypes.string,
 };
@@ -154,6 +159,9 @@ Login.propTypes = {
 Login.defaultProps = {
   username: '',
   password: '',
+  userEmail: '',
+  loginError: '',
+  loginErrorDetails: '',
 };
 
 // Export component

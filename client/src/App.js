@@ -64,6 +64,8 @@ class App extends Component {
       users: {},
       signUpError: '',
       signUpErrorDetails: '',
+      loginError: '',
+      loginErrorDetails: '',
     };
 
     this.login = this.login.bind(this);
@@ -94,6 +96,8 @@ class App extends Component {
       this.setState({
         signUpError: '',
         signUpErrorDetails: '',
+        loginError: '',
+        loginErrorDetails: '',
         userEmail: '',
         password: '',
       });
@@ -108,6 +112,8 @@ class App extends Component {
         password,
         signUpError,
         SignUpErrorDetails,
+        loginError,
+        loginErrorDetails,
       } = this.state;
 
       if (userEmail === '') {
@@ -157,22 +163,22 @@ class App extends Component {
         const {
           userEmail,
           password,
-          signUpError,
-          signUpErrorDetails,
+          loginError,
+          loginErrorDetails,
         } = this.state;
 
         if (userEmail === '') {
           this.setState({
-            signUpError: 'Email address is required.',
-            signUpErrorDetails: '',
+            loginError: 'Email address is required.',
+            loginErrorDetails: '',
           });
           return;
         }
 
         if (password === '') {
           this.setState({
-            signUpError: 'Password is required.',
-            signUpErrorDetails: '',
+            loginError: 'Password is required.',
+            loginErrorDetails: '',
           });
           return;
         }
@@ -183,24 +189,24 @@ class App extends Component {
             console.log(err);
             if (err.code === 'auth/invalid-email') {
               this.setState({
-                signUpError: 'The email address entered is not valid.',
-                signUpErrorDetails: 'Use the following format: someone@example.com.',
+                loginError: 'The email address entered is not valid.',
+                loginErrorDetails: 'Use the following format: someone@example.com.',
               });
               return;
             }
 
             if (err.code === 'auth/user-not-found') {
               this.setState({
-                signUpError: 'There is no user record corresponding to this email.',
-                signUpErrorDetails: 'The user might have been deleted or does not exist.',
+                loginError: 'There is no user record corresponding to this email.',
+                loginErrorDetails: 'The user might have been deleted or does not exist.',
               });
               return;
             }
 
             if (err.code === 'auth/wrong-password') {
               this.setState({
-                signUpError: 'Password is not correct.',
-                signUpErrorDetails: 'Verify that you entered your password correctly.',
+                loginError: 'Password is not correct.',
+                loginErrorDetails: 'Verify that you entered your password correctly.',
               });
               return;
             }
@@ -252,6 +258,8 @@ class App extends Component {
           password,
           signUpError,
           signUpErrorDetails,
+          loginError,
+          loginErrorDetails,
         } = this.state;
         // const { classes } = this.props;
         // console.log(user);
@@ -331,8 +339,8 @@ class App extends Component {
                               userEmail={userEmail}
                               onChange={this.handleChange}
                               password={password}
-                              signUpError={signUpError}
-                              signUpErrorDetails={signUpErrorDetails}
+                              loginError={loginError}
+                              loginErrorDetails={loginErrorDetails}
                             />
                           )}
                         />
