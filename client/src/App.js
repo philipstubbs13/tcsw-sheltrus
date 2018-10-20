@@ -3,10 +3,15 @@ import React, { Component } from 'react';
 // Importing React Router to add page routes.
 // Import third-party routing library (react-router-dom)
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Route,
   Switch,
 } from 'react-router-dom';
+import {
+  createBrowserHistory,
+  createHashHistory,
+  createMemoryHistory
+} from 'history';
 // Import Material UI components and styling.
 import { withStyles } from '@material-ui/core/styles';
 // Import Lodash
@@ -89,7 +94,7 @@ class App extends Component {
         this.usersRef.once('value', (snapshot) => {
           this.setState({ users: snapshot.val() });
         });
-        // console.log(user);
+        console.log(user);
       }
     });
   }
@@ -137,7 +142,9 @@ class App extends Component {
             signUpErrorDetails: '',
           });
         }
+        this.signIn();
       });
+      // this.props.history.push('/');
     };
 
       handleChange = (event) => {
@@ -145,6 +152,16 @@ class App extends Component {
           [event.target.name]: event.target.value,
         });
       };
+
+      signIn() {
+        const { userEmail, password } = this.state;
+        // Sign in existing user
+        firebase.auth().signInWithEmailAndPassword(userEmail, password)
+          .catch((err) => {
+            // Handle errors
+            console.log(err);
+          });
+      }
 
       // Handles authentication with firebase.
       // Here we call the signInWithPopup method from the auth module,
@@ -197,7 +214,7 @@ class App extends Component {
 
         return (
           <div className="App">
-            <BrowserRouter>
+            <Router>
               <div className="app-pages">
                 {/* If the user is authenticated, make all routes available to the user. */}
                 {user
@@ -292,7 +309,7 @@ class App extends Component {
                   )}
                 <Footer />
               </div>
-            </BrowserRouter>
+            </Router>
           </div>
         );
       }

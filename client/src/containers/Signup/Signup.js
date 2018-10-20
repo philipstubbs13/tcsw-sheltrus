@@ -43,6 +43,9 @@ const styles = {
 };
 
 class Signup extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
   render() {
     // ES6 destructuring
     const {
@@ -114,7 +117,7 @@ class Signup extends Component {
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">
             <Grid item className={classes.placeToStay} id="signup-btn">
-              <Button variant="contained" color="primary" className="login-button" onClick={onSubmit}>
+              <Button variant="contained" color="primary" className="login-button" onClick={onSubmit} component={Link} to="/">
                 Sign up
               </Button>
             </Grid>
