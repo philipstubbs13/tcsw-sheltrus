@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { storage, database } from '../../firebase-config';
 // import css
 import './Profile.css';
+// Import placeholder profile image (if user doesn't have profile photo)
+import profilePic from './profile.png';
 
 const styles = {
   profileInfo: {
@@ -55,9 +57,15 @@ class Profile extends Component {
   componentDidMount() {
     // console.log(this.userRef.child('photoURL'));
     this.userRef.child('photoURL').on('value', (snapshot) => {
-      this.setState({
-        avatarURL: snapshot.val(),
-      });
+      if (snapshot.val()) {
+        this.setState({
+          avatarURL: snapshot.val(),
+        });
+      } else {
+        this.setState({
+          avatarURL: profilePic,
+        });
+      }
     });
   }
 

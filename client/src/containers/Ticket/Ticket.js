@@ -6,8 +6,12 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+// Import database from firebase config file.
+import { database } from '../../firebase-config';
 // Import qrcode placeholder
 import qrCode from './qrcode.png';
+// Import placeholder profile image (if user doesn't have profile photo)
+import profilePic from '../Profile/profile.png';
 
 // CSS in JS
 const styles = {
@@ -39,9 +43,41 @@ const styles = {
 };
 
 class Ticket extends Component {
+  constructor(props) {
+    super(props);
+    this.usersRef = null;
+    this.userRef = null;
+    this.state = {
+      userPhoto: '',
+      uid: props.uid,
+    };
+
+    const { uid } = this.state;
+    this.userRef = database.ref('/users').child(uid);
+  }
+
+  componentDidMount() {
+    // If the user has a photo that they uploaded previously,
+    // Grab that photo from firebase and display it.
+    // Else, if there is no photo to grab from firebase,
+    // Then display a placeholder profile pic.
+    this.userRef.child('photoURL').on('value', (snapshot) => {
+      if (snapshot.val()) {
+        this.setState({
+          userPhoto: snapshot.val(),
+        });
+      } else {
+        this.setState({
+          userPhoto: profilePic,
+        });
+      }
+    });
+  }
+
   render() {
     // ES6 destructuring
-    const { classes, photo } = this.props;
+    const { classes } = this.props;
+    const { userPhoto } = this.state;
 
     return (
       <div>
@@ -63,7 +99,7 @@ class Ticket extends Component {
             </Grid>
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <img
-                src={photo}
+                src={userPhoto}
                 alt="profile pic"
                 className={classes.profilePic}
               />
@@ -78,7 +114,7 @@ class Ticket extends Component {
 // Check prop types
 Ticket.propTypes = {
   classes: PropTypes.object.isRequired,
-  photo: PropTypes.string.isRequired,
+  uid: PropTypes.string.isRequired,
 };
 
 // Export component
