@@ -46,6 +46,9 @@ class Login extends Component {
     const {
       classes,
       handleLogin,
+      handleSignIn,
+      onChange,
+      userEmail,
       username,
       password,
     } = this.props;
@@ -67,16 +70,16 @@ class Login extends Component {
               </Typography>
               <br />
               <TextField
-                id="login-username"
+                id="login-email"
                 className={classes.textField}
-                label="Username"
+                label="Email"
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
-                name="username"
-                value={username}
+                name="userEmail"
+                value={userEmail}
                 variant="outlined"
-                onChange={this.onChange}
+                onChange={onChange}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -90,7 +93,7 @@ class Login extends Component {
                 name="password"
                 type="password"
                 margin="normal"
-                onChange={this.onChange}
+                onChange={onChange}
                 value={password}
                 variant="outlined"
                 InputLabelProps={{
@@ -101,7 +104,7 @@ class Login extends Component {
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">
             <Grid item className={classes.placeToStay} id="login-btn">
-              <Button variant="contained" color="primary" className="login-button" component={Link} to="/profile">
+              <Button variant="contained" color="primary" className="login-button" onClick={handleSignIn}>
                 Login
               </Button>
             </Grid>

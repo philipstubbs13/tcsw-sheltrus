@@ -153,7 +153,7 @@ class App extends Component {
         });
       };
 
-      signIn() {
+      signIn = () => {
         const { userEmail, password } = this.state;
         // Sign in existing user
         firebase.auth().signInWithEmailAndPassword(userEmail, password)
@@ -282,7 +282,10 @@ class App extends Component {
                             <Login
                               {...props}
                               handleLogin={this.login}
+                              handleSignIn={this.signIn}
                               username={username}
+                              userEmail={userEmail}
+                              onChange={this.handleChange}
                               password={password}
                             />
                           )}
