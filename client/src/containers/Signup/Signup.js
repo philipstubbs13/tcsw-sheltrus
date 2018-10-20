@@ -36,6 +36,10 @@ const styles = {
     fontSize: 20,
     marginTop: 20,
   },
+  signUpError: {
+    color: 'var(--form-error-color)',
+    textAlign: 'center',
+  },
 };
 
 class Signup extends Component {
@@ -48,6 +52,8 @@ class Signup extends Component {
       password,
       onChange,
       onSubmit,
+      signUpError,
+      signUpErrorDetails,
     } = this.props;
 
     return (
@@ -98,6 +104,12 @@ class Signup extends Component {
                   shrink: true,
                 }}
               />
+              <Typography variant="h6" className={classes.signUpError}>
+                {signUpError}
+              </Typography>
+              <Typography variant="h6" className={classes.signUpError}>
+                {signUpErrorDetails}
+              </Typography>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="center" spacing={16} className="page-container">

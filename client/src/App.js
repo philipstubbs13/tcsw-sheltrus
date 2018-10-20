@@ -62,6 +62,8 @@ class App extends Component {
       userEmail: '',
       password: '',
       users: {},
+      signUpError: '',
+      signUpErrorDetails: '',
     };
 
     this.login = this.login.bind(this);
@@ -137,7 +139,21 @@ class App extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { userEmail, password } = this.state;
+    const { userEmail, password, signUpError, SignUpErrorDetails } = this.state;
+
+    if (userEmail === '') {
+      this.setState({
+        signUpError: 'Email address is required.',
+      });
+      return;
+    }
+
+    if (password === '') {
+      this.setState({
+        signUpError: 'Password is required.',
+      });
+      return;
+    }
 
     // Register with firebase.
     // Register a new user
@@ -147,6 +163,17 @@ class App extends Component {
       let errorMessage = error.message;
       console.log(errorCode);
       console.log(errorMessage);
+      if (errorCode === 'auth/invalid-email') {
+        this.setState({
+          signUpError: 'The email address entered is not valid.',
+          signUpErrorDetails: 'Use the following format: someone@example.com.',
+        });
+      } else {
+        this.setState({
+          signUpError: errorMessage,
+          signUpErrorDetails: '',
+        });
+      }
     });
   };
 
@@ -158,6 +185,8 @@ class App extends Component {
       username,
       userEmail,
       password,
+      signUpError,
+      signUpErrorDetails,
     } = this.state;
     // const { classes } = this.props;
     // console.log(user);
@@ -249,6 +278,8 @@ class App extends Component {
                           password={password}
                           onChange={this.handleChange}
                           onSubmit={this.onSubmit}
+                          signUpError={signUpError}
+                          signUpErrorDetails={signUpErrorDetails}
                         />
                       )}
                     />
