@@ -7,37 +7,19 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 // Import firebase
 import firebase from 'firebase';
 // import database
 import { database } from '../../firebase-config';
-// import ReportErrorField component
-import ReportErrorField from '../ReportError/ReportErrorField';
-// import SnackbarMessage component
-import SnackbarMessage from '../../components/SnackbarMessage';
+// import css
+import './DeleteAccount.css';
 
 const styles = {
   placeToStay: {
-    marginTop: 10,
-    width: '70%',
-    textAlign: 'center',
-  },
-  appInfo: {
-    marginTop: 30,
-    width: '30%',
-    textAlign: 'center',
-  },
-  appDetails: {
-    marginTop: 20,
-  },
-  reportErrorTitle: {
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  aboutOverview: {
-    width: '0%',
+    width: '100%',
   },
   deleteReason: {
     marginTop: 40,
@@ -49,6 +31,18 @@ const styles = {
   },
   menu: {
     width: 200,
+  },
+  deleteAccountCheckbox: {
+    marginTop: 20,
+  },
+  formGroup: {
+    marginTop: 10,
+  },
+  deleteAccountTitle: {
+    textAlign: 'center',
+  },
+  deleteAccountInfo: {
+    textAlign: 'center',
   },
 };
 
@@ -84,10 +78,12 @@ class DeleteAccount extends Component {
     super(props);
     this.state = {
       deleteReason: '',
+      deleteFeedback: '',
       open: false,
+      checked: false,
     };
 
-    this.deleteAccountRef = database.ref('/deleteaccout');
+    this.deleteAccountRef = database.ref('/deleteaccount');
   }
 
   handleChange = (event) => {
@@ -96,14 +92,19 @@ class DeleteAccount extends Component {
     });
   };
 
+  handleCheckChange = name => (event) => {
+    this.setState({ [name]: event.target.checked });
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { deleteReason } = this.state;
+    const { deleteReason, deleteFeedback } = this.state;
     const { uid, email, name } = this.props;
 
     this.deleteAccountRef.child(uid).push({
       deleteReason,
+      deleteFeedback,
       email,
       name,
     });
@@ -111,6 +112,7 @@ class DeleteAccount extends Component {
     this.setState({
       open: true,
       deleteReason: '',
+      deleteFeedback: '',
     });
 
     const user = firebase.auth().currentUser;
@@ -118,8 +120,10 @@ class DeleteAccount extends Component {
 
     user.delete().then(() => {
       // User deleted.
+      this.props.history.push('/');
     }).catch((error) => {
       // An error happened.
+      console.log(error);
     });
   };
 
@@ -133,61 +137,94 @@ class DeleteAccount extends Component {
 
   render() {
     const { classes, email, name } = this.props;
-    const { deleteReason, open } = this.state;
+    const { deleteReason, open, checked, deleteFeedback } = this.state;
 
     return (
       <div className="page">
-        <Grid container direction="column" justify="center" spacing={16} className="page-container">
-          <Grid item xs={12} className={classes.placeToStay}>
-            <Typography variant="h4" className={classes.reportErrorTitle}>Delete your account</Typography>
-            <p>Hi, we're sorry to hear you'd like to delete your account.</p>
-            <p>Deleting your account will permanently delete your Shelter user account and all the data associated with it.</p>
-            <p>This cannot be reversed, so make sure you're sure this is what you want to do.</p>
-            <Grid container spacing={16} justify="center">
-              <Grid item xs={6} className={classes.deleteReason}>
-                <Typography variant="h6">
-                  Why are you deleting your account?
-                </Typography>
-              </Grid>
-              <Grid item xs={6} className={classes.deleteReason}>
-                <TextField
-                  id="deleteReason"
-                  name="deleteReason"
-                  select
-                  value={deleteReason}
-                  onChange={this.handleChange}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  SelectProps={{
-                    MenuProps: {
-                      className: classes.menu,
-                    },
-                  }}
-                >
-                  {deleteReasonDropDown.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-            </Grid>
-            <Grid container spacing={16}>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
+        <Grid container direction="column" spacing={24} className="page-container">
+          <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+            <Typography variant="h4" className={classes.deleteAccountTitle}>Delete your account</Typography>
+            <div className={classes.deleteAccountInfo}>
+              <p>Hi, we're sorry to hear you'd like to delete your account.</p>
+              <p>Deleting your account will permanently delete your
+                Shelter user account and all the data associated with it.
+              </p>
+              <p>This cannot be reversed, so make sure you're sure this is what you want to do.</p>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
+            <div className={classes.formGroup}>
+              <Typography variant="h6">
+                Why are you deleting your account?
+              </Typography>
+              <TextField
+                id="deleteReason"
+                name="deleteReason"
+                select
+                value={deleteReason}
+                onChange={this.handleChange}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+              >
+                {deleteReasonDropDown.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+            <div className={classes.formGroup}>
+              <Typography variant="h6">
+                Your feedback matters. Is there anything else you'd like us to know.
+              </Typography>
+              <TextField
+                id="deleteFeedback"
+                name="deleteFeedback"
+                value={deleteFeedback}
+                onChange={this.handleChange}
+                multiline
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                rows={5}
+                fullWidth
+                rowsMax={8}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  checked={checked}
+                  onChange={this.handleCheckChange('checked')}
+                  value="checked"
                   color="primary"
-                  className="report-error-btn"
-                  onClick={this.onSubmit}
-                >
-                  Permanently delete my account
-                </Button>
-              </Grid>
-            </Grid>
+                />
+              )}
+              label="Yes, I'm sure I want to permanently delete my account."
+              className={classes.deleteAccountCheckbox}
+            />
+            <Button
+              variant="contained"
+              color="secondary"
+              className="delete-account-btn"
+              onClick={this.onSubmit}
+              disabled={!checked}
+            >
+              Permanently delete my account
+            </Button>
           </Grid>
         </Grid>
       </div>
