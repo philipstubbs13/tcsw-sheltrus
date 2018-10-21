@@ -93,6 +93,7 @@ class App extends Component {
           this.userRef.set(userData);
           if (username) {
             this.userRef.child('displayName').set(username);
+            window.location.reload();
           }
         });
 
