@@ -90,6 +90,7 @@ class Signup extends Component {
                 InputLabelProps={{
                   shrink: true,
                 }}
+                helperText="This is the name that will be displayed within the app."
               />
               <TextField
                 id="userEmail"

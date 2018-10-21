@@ -79,15 +79,21 @@ class App extends Component {
     // if they were already previously authenticated.
     // If they were, we set their user details back into the state.
     auth.onAuthStateChanged((user) => {
+      const { username } = this.state;
       if (user) {
         this.setState({ user });
+        if (username) {
+          this.updateUserData(user);
+        }
         this.usersRef = database.ref('/users');
         this.userRef = this.usersRef.child(user.uid);
-
         this.userRef.once('value').then((snapshot) => {
           if (snapshot.val()) return;
           const userData = pick(user, ['displayName', 'photoURL', 'email', 'uid']);
           this.userRef.set(userData);
+          if (username) {
+            this.userRef.child('displayName').set(username);
+          }
         });
 
         this.usersRef.once('value', (snapshot) => {
@@ -103,6 +109,18 @@ class App extends Component {
         userEmail: '',
         password: '',
       });
+    });
+  }
+
+  updateUserData = (user) => {
+    const { username } = this.state;
+    user.updateProfile({
+      displayName: username,
+    }).then(() => {
+      // Profile updated successfully!
+      // "Jane Q. User"
+    }, (error) => {
+      // An error happened.
     });
   }
 
