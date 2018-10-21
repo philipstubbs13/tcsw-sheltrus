@@ -260,7 +260,7 @@ class DeleteAccount extends Component {
             </div>
             <div className={classes.formGroup}>
               <Typography variant="h6">
-                Your feedback matters. Is there anything else you&#39;d like us to know.
+                Your feedback matters. Is there anything else you&#39;d like us to know?
               </Typography>
               <TextField
                 id="deleteFeedback"

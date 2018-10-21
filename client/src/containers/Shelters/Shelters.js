@@ -106,7 +106,7 @@ class Shelters extends Component {
                   <div>
                     <Typography variant="h6" style={{ textAlign: 'center' }}>
                       Tap <i className="fas fa-bed" /> to
-                      reserve a bed at a participating shelter.
+                      request a bed at a participating shelter.
                     </Typography>
                     <List>
                       {shelters.map(shelter => (

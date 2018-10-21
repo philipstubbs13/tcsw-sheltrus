@@ -9,12 +9,15 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
 // Import Intake Form Field component
 import IntakeFormField from './IntakeFormField';
 // Import SimpleMap component
 import SimpleMap from './SimpleMap';
 // import css
 import './IntakeForm.css';
+// import SnackbarMessage component
+import SnackbarMessage from '../../components/SnackbarMessage';
 
 const styles = ({
   textField: {
@@ -39,6 +42,9 @@ const styles = ({
   readOnlyInfo: {
     marginTop: 40,
   },
+  requestShelter: {
+    display: 'flex',
+  },
 });
 
 const API = 'https://gis.hennepin.us/arcgis/rest/services/HennepinData/PLACES/MapServer/8/query?where=1%3D1&outFields=*&outSR=4326&f=json';
@@ -48,6 +54,7 @@ class IntakeForm extends Component {
     super();
     this.state = {
       shelters: [],
+      open: false,
     };
   }
 
@@ -58,9 +65,26 @@ class IntakeForm extends Component {
     // console.log(this.state.shelters);
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { open } = this.state;
+    this.setState({
+      open: true,
+    });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
   render() {
     const { classes, match } = this.props;
-    const { shelters } = this.state;
+    const { shelters, open } = this.state;
     // console.log(this.props);
     // console.log(shelters);
 
@@ -71,15 +95,32 @@ class IntakeForm extends Component {
             <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
               <Grid container justify="center" direction="column">
                 <Typography variant="h6" className={classes.formPageTitle}>
-                Tap SUBMIT to reserve a bed now.
+                Tap REQUEST BED to request a bed now.
                 </Typography>
                 <br />
-                <Button variant="contained" color="primary" className="book-bed-submit-button" component={Link} to="/">
-                  Submit
-                </Button>
                 <div>
                   {shelters.filter(shelter => shelter.attributes.OBJECTID == match.params.id).map(shelter => (
                     <div key={shelter.attributes.OBJECTID} className={classes.selectedShelter}>
+                      <Grid container justify="center" spacing={16}>
+                        <Button variant="contained" color="primary" className="book-bed-submit-button" onClick={this.onSubmit}>
+                          Request Bed
+                        </Button>
+                        <Snackbar
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                          }}
+                          open={open}
+                          autoHideDuration={6000}
+                          onClose={this.handleClose}
+                        >
+                          <SnackbarMessage
+                            onClose={this.handleClose}
+                            variant="success"
+                            message="Thank you! Your request has been submitted. It can take up to 1 to 2 hours to confirm your request."
+                          />
+                        </Snackbar>
+                      </Grid>
                       <div className={classes.shelterName}>
                         <Typography variant="h4">{shelter.attributes.NAME}</Typography>
                       </div>
