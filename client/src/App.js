@@ -84,6 +84,7 @@ class App extends Component {
         this.setState({ user });
         if (username) {
           this.updateUserData(user);
+          this.verifyEmail(user);
         }
         this.usersRef = database.ref('/users');
         this.userRef = this.usersRef.child(user.uid);
@@ -122,6 +123,15 @@ class App extends Component {
       // "Jane Q. User"
     }, (error) => {
       // An error happened.
+    });
+  }
+
+  verifyEmail = (user) => {
+    user.sendEmailVerification().then(() => {
+      // Email sent.
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
     });
   }
 
