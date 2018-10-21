@@ -80,11 +80,14 @@ class App extends Component {
     // If they were, we set their user details back into the state.
     auth.onAuthStateChanged((user) => {
       const { username } = this.state;
-      if (user) {
+      if (user && user.emailVerified === false && username) {
+        this.verifyEmail(user);
+        console.log('please verify user');
+      }
+      if (user && user.emailVerified) {
         this.setState({ user });
         if (username) {
           this.updateUserData(user);
-          this.verifyEmail(user);
         }
         this.usersRef = database.ref('/users');
         this.userRef = this.usersRef.child(user.uid);
@@ -110,6 +113,7 @@ class App extends Component {
         loginErrorDetails: '',
         userEmail: '',
         password: '',
+        username: '',
       });
     });
   }
@@ -223,7 +227,7 @@ class App extends Component {
         firebase.auth().signInWithEmailAndPassword(userEmail, password)
           .catch((err) => {
             // Handle errors
-            // console.log(err);
+            console.log(err);
             if (err.code === 'auth/invalid-email') {
               this.setState({
                 loginError: 'The email address entered is not valid.',
