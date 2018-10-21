@@ -44,7 +44,7 @@ const styles = {
 
 class Signup extends Component {
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   render() {
@@ -77,10 +77,24 @@ class Signup extends Component {
               </Typography>
               <br />
               <TextField
+                id="username"
+                className={classes.textField}
+                label="Display name"
+                fullWidth
+                margin="normal"
+                name="username"
+                value={username}
+                type="text"
+                variant="outlined"
+                onChange={onChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
                 id="userEmail"
                 className={classes.textField}
                 label="Email"
-                style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
                 name="userEmail"
@@ -96,7 +110,6 @@ class Signup extends Component {
                 id="signup-password"
                 className={classes.textField}
                 label="Password"
-                style={{ margin: 8 }}
                 fullWidth
                 name="password"
                 type="password"

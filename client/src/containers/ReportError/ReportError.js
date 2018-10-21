@@ -134,13 +134,9 @@ class ReportError extends Component {
         <Grid container direction="column" justify="center" spacing={16} className="page-container">
           <Grid item xs={12} className={classes.placeToStay}>
             <Typography variant="h4" className={classes.reportErrorTitle}>Report error</Typography>
-            <p>Use this form to report an error if you...</p>
-            <ul>
-              <li>Find incorrect information in your profile OR</li>
-              <li>Find incorrect informaton about one or more of the
-                shelters listed in the app.
-              </li>
-            </ul>
+            <p>Use this form to report an error if you find incorrect
+              informaton about one or more of the shelters listed in the app.
+            </p>
             <form className={classes.container}>
               <TextField
                 id="errorLocation"

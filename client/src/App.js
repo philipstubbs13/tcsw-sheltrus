@@ -114,7 +114,16 @@ class App extends Component {
         password,
         signUpError,
         SignUpErrorDetails,
+        username,
+        user,
       } = this.state;
+
+      if (username === '') {
+        this.setState({
+          signUpError: 'Display name is required',
+        });
+        return;
+      }
 
       if (userEmail === '') {
         this.setState({
@@ -150,7 +159,6 @@ class App extends Component {
           });
         }
       });
-      // this.props.history.push('/');
     };
 
       handleChange = (event) => {
