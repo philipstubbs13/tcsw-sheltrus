@@ -10,12 +10,15 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Snackbar from '@material-ui/core/Snackbar';
 // Import firebase
 import firebase from 'firebase';
 // import database
 import { database } from '../../firebase-config';
 // import css
 import './DeleteAccount.css';
+// import SnackbarMessage component
+import SnackbarMessage from '../../components/SnackbarMessage';
 
 const styles = {
   placeToStay: {
@@ -43,6 +46,10 @@ const styles = {
   },
   deleteAccountInfo: {
     textAlign: 'center',
+  },
+  deleteAccountError: {
+    color: 'var(--form-error-color)',
+    marginTop: 10,
   },
 };
 
@@ -79,8 +86,11 @@ class DeleteAccount extends Component {
     this.state = {
       deleteReason: '',
       deleteFeedback: '',
-      open: false,
+      deleteAccountError: '',
+      openReauthenticate: false,
       checked: false,
+      reauthenticate: false,
+      userProvidedPassword: '',
     };
 
     this.deleteAccountRef = database.ref('/deleteaccount');
@@ -99,8 +109,13 @@ class DeleteAccount extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { deleteReason, deleteFeedback } = this.state;
-    const { uid, email, name } = this.props;
+    const { deleteReason, deleteFeedback, deleteAccountError } = this.state;
+    const {
+      uid,
+      email,
+      name,
+      history,
+    } = this.props;
 
     this.deleteAccountRef.child(uid).push({
       deleteReason,
@@ -109,23 +124,63 @@ class DeleteAccount extends Component {
       name,
     });
 
-    this.setState({
-      open: true,
-      deleteReason: '',
-      deleteFeedback: '',
-    });
-
     const user = firebase.auth().currentUser;
-    console.log(user);
+    // console.log(user);
 
     user.delete().then(() => {
       // User deleted.
-      this.props.history.push('/');
+      this.setState({
+        open: true,
+        deleteReason: '',
+        deleteFeedback: '',
+        deleteAccountError: '',
+      });
+      history.push('/');
     }).catch((error) => {
       // An error happened.
-      console.log(error);
+      // console.log(error);
+      if (error.code === 'auth/requires-recent-login') {
+        this.setState({
+          deleteAccountError: error.message,
+          reauthenticate: true,
+        });
+      }
     });
   };
+
+  onReauthenticateSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      checked,
+      reauthenticate,
+      userProvidedPassword,
+      reauthenticateError,
+      openReauthenticate,
+    } = this.state;
+    const user = firebase.auth().currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      userProvidedPassword,
+    );
+    // console.log(credential);
+    user.reauthenticateAndRetrieveDataWithCredential(credential).then(() => {
+      // User re-authenticated.
+      this.setState({
+        reauthenticate: false,
+        reauthenticateError: '',
+        openReauthenticate: true,
+      });
+    }).catch((error) => {
+      // An error happened.
+      // console.log(error);
+      if (error.code === 'auth/wrong-password') {
+        this.setState({
+          reauthenticateError: 'Password is not correct. Check that you entered your password correctly.',
+        });
+      }
+    });
+  }
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -135,9 +190,27 @@ class DeleteAccount extends Component {
     this.setState({ open: false });
   };
 
+  handleReauthenticateClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ openReauthenticate: false });
+  };
+
   render() {
     const { classes, email, name } = this.props;
-    const { deleteReason, open, checked, deleteFeedback } = this.state;
+    const {
+      deleteReason,
+      open,
+      openReauthenticate,
+      checked,
+      deleteFeedback,
+      deleteAccountError,
+      reauthenticate,
+      reauthenticateError,
+      userProvidedPassword,
+    } = this.state;
 
     return (
       <div className="page">
@@ -145,11 +218,13 @@ class DeleteAccount extends Component {
           <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
             <Typography variant="h4" className={classes.deleteAccountTitle}>Delete your account</Typography>
             <div className={classes.deleteAccountInfo}>
-              <p>Hi, we're sorry to hear you'd like to delete your account.</p>
+              <p>Hi, we&#39;re sorry to hear you&#39;d like to delete your account.</p>
               <p>Deleting your account will permanently delete your
                 Shelter user account and all the data associated with it.
               </p>
-              <p>This cannot be reversed, so make sure you're sure this is what you want to do.</p>
+              <p>This cannot be reversed, so make sure you&#39;re sure
+                this is what you want to do.
+              </p>
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6} className={classes.placeToStay}>
@@ -185,7 +260,7 @@ class DeleteAccount extends Component {
             </div>
             <div className={classes.formGroup}>
               <Typography variant="h6">
-                Your feedback matters. Is there anything else you'd like us to know.
+                Your feedback matters. Is there anything else you&#39;d like us to know.
               </Typography>
               <TextField
                 id="deleteFeedback"
@@ -216,15 +291,65 @@ class DeleteAccount extends Component {
               label="Yes, I'm sure I want to permanently delete my account."
               className={classes.deleteAccountCheckbox}
             />
+            {reauthenticate && checked
+              ? (
+                <div>
+                  <Typography variant="h6" className={classes.deleteAccountError}>
+                    {deleteAccountError}
+                  </Typography>
+                  <Typography variant="h6">
+                    Enter your password to RELOGIN
+                  </Typography>
+                  <TextField
+                    id="relogin-password"
+                    className={classes.textField}
+                    fullWidth
+                    name="userProvidedPassword"
+                    type="password"
+                    margin="normal"
+                    onChange={this.handleChange}
+                    value={userProvidedPassword}
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <Typography variant="h6" className={classes.deleteAccountError}>
+                    {reauthenticateError}
+                  </Typography>
+                  <Button disabled={userProvidedPassword === ''} variant="contained" color="primary" className="relogin-button" onClick={this.onReauthenticateSubmit}>
+                    Relogin
+                  </Button>
+                </div>
+              )
+              : (
+                null
+              )}
+            <br />
             <Button
               variant="contained"
               color="secondary"
               className="delete-account-btn"
               onClick={this.onSubmit}
-              disabled={!checked}
+              disabled={!checked || reauthenticate}
             >
               Permanently delete my account
             </Button>
+            <Snackbar
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              open={openReauthenticate}
+              autoHideDuration={6000}
+              onClose={this.handleReauthenticateClose}
+            >
+              <SnackbarMessage
+                onClose={this.handleReauthenticateClose}
+                variant="success"
+                message="Relogin successful"
+              />
+            </Snackbar>
           </Grid>
         </Grid>
       </div>
@@ -237,7 +362,13 @@ DeleteAccount.propTypes = {
   classes: PropTypes.object.isRequired,
   uid: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  history: PropTypes.object.isRequired,
+};
+
+// Default prop types
+DeleteAccount.defaultProps = {
+  name: '',
 };
 
 // Export component
