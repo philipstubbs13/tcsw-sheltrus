@@ -31,6 +31,7 @@ import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 // Import Tabs component (when user is authenticated)
 import Tabs from './components/Tabs';
+import Modal from './components/Modal';
 // import CSS for Login page that user will see if they are not authenticated.
 import './containers/Login/Login.css';
 // import Firebase configuration.
@@ -68,10 +69,12 @@ class App extends Component {
       signUpErrorDetails: '',
       loginError: '',
       loginErrorDetails: '',
+      show: false,
     };
 
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -79,16 +82,18 @@ class App extends Component {
     // if they were already previously authenticated.
     // If they were, we set their user details back into the state.
     auth.onAuthStateChanged((user) => {
-      const { username } = this.state;
+      const { username, show } = this.state;
       if (user && user.emailVerified === false && username) {
         this.verifyEmail(user);
         console.log('please verify user');
+        this.toggleModal();
       }
       if (user && user.emailVerified) {
         this.setState({ user });
         if (username) {
           this.updateUserData(user);
         }
+        this.toggleModal();
         this.usersRef = database.ref('/users');
         this.userRef = this.usersRef.child(user.uid);
         this.userRef.once('value').then((snapshot) => {
@@ -118,6 +123,8 @@ class App extends Component {
     });
   }
 
+  toggleModal = () => this.setState({ show: !this.state.show });
+
   updateUserData = (user) => {
     const { username } = this.state;
     user.updateProfile({
@@ -130,8 +137,8 @@ class App extends Component {
     });
   }
 
-  verifyEmail = (user) => {
-    user.sendEmailVerification().then(() => {
+  verifyEmail = () => {
+    firebase.auth().currentUser.sendEmailVerification().then(() => {
       // Email sent.
     }).catch((error) => {
       // An error happened.
@@ -149,6 +156,7 @@ class App extends Component {
         SignUpErrorDetails,
         username,
         user,
+        show,
       } = this.state;
 
       if (username === '') {
@@ -175,6 +183,9 @@ class App extends Component {
       // Register with firebase.
       // Register a new user
       firebase.auth().createUserWithEmailAndPassword(userEmail, password).catch((error) => {
+        this.setState({
+          show: false,
+        });
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -301,6 +312,7 @@ class App extends Component {
           signUpErrorDetails,
           loginError,
           loginErrorDetails,
+          show,
         } = this.state;
         // const { classes } = this.props;
         // console.log(user);
@@ -409,6 +421,10 @@ class App extends Component {
                               onSubmit={this.onSubmit}
                               signUpError={signUpError}
                               signUpErrorDetails={signUpErrorDetails}
+                              show={show}
+                              toggleModal={this.toggleModal}
+                              verifyEmail={this.verifyEmail}
+                              user={user}
                             />
                           )}
                         />
