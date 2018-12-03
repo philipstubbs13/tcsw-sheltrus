@@ -107,23 +107,137 @@ When you come to the app, the first thing you need to do is sign up (if you are 
 
 The My profile page is a basic profile page for you that includes your name and photo for identification purposes. This page helps shelters identify you quickly at check in and provides you with another form of identification if you lose or misplace your primary id. From this page, you can upload a new photo or click <b>I NEED A PLACE TO STAY</b> to see a list of shelters nearby.
 
-### Shelters page - list view
+#### Shelters page - list view
 
 The app provides a list of shelters that you can use to quickly look up homeless shelters in Minneapolis. Each shelter listed in the app has information like street address, phone number, website, shelter type, any additonal notes, as well as a map showing the shelter's location. For each participating shelter in the app, you can click <b>REQUEST BED</b> when viewing information for a particular shelter to send your information to that shelter.
 
-### Shelters page - map view
+#### Shelters page - map view
 
 In addition to the ability to see a list of shelters, it is also possible to see one map of all the shelters in Minneapolis. This makes it easier for you to see exactly how far you are from certain shelters.
 
-### Check in page
+#### Check in page
 
 When you are ready to check into a shelter, you go to the Check in page. On the Check in page, there are 2 ways to check into a shelter. If you have a smartphone, you can simply have the homeless shelter scan the QR code that contains your information to check you in from the app. If you don't have a smartphone, you can call the number listed on this page, which will take you through a voice messaging system to check you in. This voice messaging system uses the Twilio API.
 
-### More information from the app menu
+#### More information from the app menu
 
 Finally, for more information, you can go to the app menu. The app menu includes a link to the app help page, about page, and report error page for reporting errors within the app. It also includes a link to the delete account page if you decide you no longer want the app and want to permanently delete your app account.
 
+### <a name="project-structure"></a> Structure of the project
 
+After you clone the repository from GitHub, you can navigate to the project root directory (tcsw-sheltrus). The project directory structure will be set up as follows:
 
+* <b>client</b>: This folder is where all the client-side code/React app lives.
+  * <b>public</b>: The public folder contains the main index.html file. This HTML file is a template. The file is empty. So, if you open it directly in a browser, you will get an empty page. Rather than placing the HTML code directly in index.html, this site uses a React component-based architecture to create, build, and render UI components to the page.
+  * <b>src</b>: The src folder is where the React components reside.
+    * <b>App.js</b>: The App.js file is where the components are imported and rendered, such as the top navigation bar, footer, and various pages.
+    * <b>index.js</b>: The index.js file is the top level file of the React app. In index.js, the App.js file is imported, and the ReactDOM.render method is used to render App.js to the page.
+    * <b>components</b>: The Components folder is where the components that are reused across the site are located. Each file represents a separate component. For example, Button.js is the button component that can be reused across the entire app for a consistent look and feel for each button.
+    * <b>containers</b>: Holds all the pages of the app and the child components within those pages. For example, inside of the containers folder, there is a Profile folder. The Profile folder contains a top-level parent container/page called Profile.js
+    * <b>App.css</b> and <b>index.css</b>: The external css stylesheets for the app.
+    * <b>firebase-config.js</b>: contains the Firebase initialization code to connect the app to Firebase.
+    * <b>sheltr-b2.svg</b>: This is the svg version of the app logo.
+  * <b>.eslintrc.json</b>: List of rules and their definitions for ESLint.
+  * <b>.gitignore</b>: Anything listed inside this file (for example, node_modules) will not be tracked by GitHub when code is committed.
+  * <b>package.json</b>: Lists the project dependencies for the client and their version numbers.
+  * <b>README.md</b>: The README file that came with setting up a create-react-app project.
+  * <b>yarn.lock</b>: Dependency tree for the project. Lists all the client dependencies and their versions.
+* <b>functions</b>: Folder for storing Firebase cloud functions. Currently not in use for anything.
+* <b>readme_images</b>: Images used in the project README file.
+* <b>.firebaserc</b>: Hidden file that allows you to quickly switch between projects with 'firebase use'.
+* <b>.gitignore</b>: Anything listed inside this file (for example, node_modules) will not be tracked by GitHub when code is committed.
+* <b>firebase.json</b>: Firebase configuration file required to deploy the app to Firebase.
+* <b>package.json</b>: Lists the project dependencies and their version numbers.
+* <b>yarn.lock</b>: Dependency tree for the project. Lists the project dependencies and their versions.
+* <b>server.js</b>: Contains the code to set up express and make a post request using the Twilio API to create a voice messaging system.
+* <b>README.md</b>: The README file that contains important information about this project.
+* <b>make-call.js</b>: Contains the JavaScript code to make a phone call using the Twilio API.
 
+## <a name="getting-started"></a> Getting started
+
+The following section will take you through the steps of setting up this app and getting it running locally on your computer.
+
+If you don't want to set up this project locally and just want to see the deployed app, go to <https://tcsw-homeless.firebaseapp.com/>.
+
+To set up this app locally on your computer, perform the following steps:
+
+  1. [Clone the repository](#clone-repository)
+  2. [Install Node.js](#install-node)
+  3. [Install yarn](#install-yarn)
+  4. [Install the project dependencies](#dependencies)
+  5. [Start the React development server](#start-server)
+
+###  <a name="clone-repository"></a> 1. Clone the repository
+The first step is to clone the project repository to a local directory on your computer. To clone the repository, run the following commands:
+
+```bash
+git clone https://github.com/philipstubbs13/tcsw-sheltrus.git
+cd ./tcsw-sheltrus
+```
+
+###  <a name="install-node"></a> 2. Install Node.js
+
+<p>If you don't already have Node.js installed on your computer, you can install the latest version <a href="https://nodejs.org/en/">here</a>.</p>
+
+### <a name="install-yarn"></a> 3. Install yarn
+
+To be able to install the dependencies and start the app locally, you will need to install yarn. Yarn is a package manager like npm.
+
+To install yarn globally, run the following command:
+
+```
+npm install -g yarn
+```
+
+For more information about yarn and other installation options, see the yarn documentation: <https://yarnpkg.com/en/>.
+
+### <a name="dependencies"></a> 4. Install the client project dependencies
+
+Change directory into the <b>client</b> directory and run the following command to install the required client dependencies:
+
+'''bash
+yarn install
+```
+
+The following packages are dependencies to the project.
+
+* [@material-ui/core](https://www.npmjs.com/package/@material-ui/core)
+* [@material-ui/icons](https://www.npmjs.com/package/@material-ui/icons)
+* [classnames](https://www.npmjs.com/package/classnames)
+* [create-react-class](https://www.npmjs.com/package/create-react-class)
+* [google-map-react](https://www.npmjs.com/package/google-map-react)
+* [google-maps-react](https://www.npmjs.com/package/google-maps-react)
+* [history](https://www.npmjs.com/package/history)
+* [lodash](https://www.npmjs.com/package/lodash)
+* [firebase](https://www.npmjs.com/package/firebase)
+* [prop-types](https://www.npmjs.com/package/prop-types)
+* [react](https://www.npmjs.com/package/react)
+* [react-dom](https://www.npmjs.com/package/react-dom)
+* [react-file-input](https://www.npmjs.com/package/react-file-input)
+* [react-firebase-file-uploader](https://www.npmjs.com/package/react-firebase-file-uploader)
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+* [react-scripts](https://www.npmjs.com/package/react-scripts)
+
+This project also uses ESLint, which includes the following dependencies:
+
+* babel-eslint
+* eslint
+* eslint-config-airbnb
+* eslint-plugin-import
+* eslint-plugin-jsx-a11y
+* eslint-plugin-react
+
+Version information for each of these packages is available in the <b>package.json</b> file in the <b>client</b> directory.
+
+After you install the client dependencies, change directory to the project root directory (tcsw-sheltrus) and run <pre>yarn install</pre> to install the remaining dependencies:
+
+* [express](https://www.npmjs.com/package/express)
+* [twilio](https://www.npmjs.com/package/twilio)
+
+###  <a name="start-server"></a> 5. Start the React development server.
+
+<p>After performing all of the setup steps in the <b>Getting started</b> section, navigate to the project root directory (<b>tcsw-sheltrus</b>) and run the following command to start the React development server.</p>
+<pre>yarn start</pre>
+
+<p>After the development server has started, a Chrome browser window should open, and you should see the app. If the browser does not automatically open after the server starts, you can verify that the app is working locally on your computer by opening Chrome and going to <a href="http://localhost:3000">http://localhost:3000</a>. Note that by default, the development server will try to start up on port 3000. If port 3000 is already in use on your computer, then the development server will use a different port.
 
