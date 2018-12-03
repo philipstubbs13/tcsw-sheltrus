@@ -4,7 +4,7 @@ Over the years, the process a homeless person has to go through to find, locate,
 
 This complex process has led to a rise in people sleeping on the streets, a rise in homeless camps along Minneapolis highways, and people dying from being denied a warm place to sleep at night. One of the fastest growing homeless demographic is youth. Many youth are turning to the streets for a variety of reasons and even using the light rail service in Minneapolis at night to keep warm.
 
-This project hopes to solve and slow down the rapidly growing homeless crisis in Minneapolis. The project is a mobile and web based app intended for homeless people to use and intended to help streamline the process of checking into the shelter. The short term goal of this app is to get homeless people into a shelter easily and quickly each night. The long term goal of this app is to provide an opportunity for homeless people to rebuild their lives and get off the streets for good.
+This project hopes to solve and slow down the rapidly growing homeless crisis in Minneapolis. The project is a mobile and web based app intended for homeless people to use as a resource and intended to help streamline the process of checking into a shelter. The short term goal of this app is to get homeless people into a shelter easily and quickly each night. The long term goal of this app is to provide an opportunity for homeless people to rebuild their lives and get off the streets for good.
 
 ## Table of contents
 
@@ -44,11 +44,11 @@ The app is current live at the following URL:
 
 ### Shelters page - list view
 
-<img src="./readme_images/shelters_list.png">
+<img src="./readme_images/shelters_list.PNG">
 
 ### Shelters page - map view
 
-<img src="./readme_images/shelters_map.png">
+<img src="./readme_images/shelters_map.PNG">
 
 ### Shelter information page
 
