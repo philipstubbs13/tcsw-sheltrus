@@ -263,7 +263,7 @@ SKIP_PREFLIGHT_CHECK=true
 
 ## <a name="twilio"></a> Instructions for setting up Twilio
 
-Comming soon...
+Coming soon...
 
 ## <a name="deployment"></a> Deploying the app
 
