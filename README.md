@@ -195,7 +195,7 @@ For more information about yarn and other installation options, see the yarn doc
 
 Change directory into the <b>client</b> directory and run the following command to install the required client dependencies:
 
-'''bash
+```bash
 yarn install
 ```
 
