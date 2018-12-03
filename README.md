@@ -241,3 +241,89 @@ After you install the client dependencies, change directory to the project root 
 
 <p>After the development server has started, a Chrome browser window should open, and you should see the app. If the browser does not automatically open after the server starts, you can verify that the app is working locally on your computer by opening Chrome and going to <a href="http://localhost:3000">http://localhost:3000</a>. Note that by default, the development server will try to start up on port 3000. If port 3000 is already in use on your computer, then the development server will use a different port.
 
+<p>Tip: if you are having difficulty starting the React development server, try creating a <b>.env</b> inside of the <b>client</b> directory.</p>
+
+<p>Inside of the <b>.env</b> file, add the following line. Don't forget to also add the <b>.env</b> file to your <b>.gitignore</b> file so that it is not pushed to GitHub when code is committed.</p>
+
+```bash
+SKIP_PREFLIGHT_CHECK=true
+```
+
+## <a name="deployment"></a> Deploying the app
+
+This site is deployed to Firebase using Firebase Hosting. For more information on hosting with Firebase, see <https://firebase.google.com/docs/hosting/>. To deploy the app, you will need to build a production version of the app as well as have the Firebase CLI installed.
+
+1. If not already installed, install the Firebase CLI globally by running the following command:
+
+```bash
+npm install -g firebase-tools
+```
+
+This installs the firebase command globally. To update to the latest version, simply re-run the same command.
+
+2. To connect your local machine to your Firebase account and obtain access to the Firebase project, run the following command:
+
+```bash
+firebase login
+```
+
+3. Change directory to the <b>tcsw-sheltrus/client</b> directory.
+
+4. If you have deployed the app before, there will be a build directory inside <b>client</b>. Delete the existing <b>build</b> directory.
+
+5. Run the following command to build a clean, production version of the app.
+<pre>yarn build</pre>
+<p>This command creates a directory called <b>build</b> inside of the <b>client</b> directory.</p>
+
+6. Commit changes to git (if not done already).
+
+7. Run the following command to deploy your changes:
+
+```bash
+firebase deploy
+```
+
+This command deploys the project to <https://tcsw-homeless.firebaseapp.com/> on firebase.
+
+## <a name="technologies-used"></a> Technologies used to create app
+
+* [Back end technolgies](#Backend)
+* [Front end technologies](#Frontend)
+* [Other technologies](#Other)
+
+### <a name ="Backend"></a> Back end technologies
+
+* Firebase Hosting (<https://firebase.google.com/docs/hosting/>)
+* Firebase Authentication (<https://firebase.google.com/docs/auth/>)
+* Firebase Realtime Database (<https://firebase.google.com/docs/database/>)
+* Twilio API (<https://www.twilio.com/docs/usage/api>)
+* Express (<https://expressjs.com/>)
+
+### <a name="Frontend"></a> Front end technologies
+
+* HTML5
+* CSS
+* Javascript (ES6)
+* React (<https://reactjs.org/>)
+* Material UI (<https://material-ui.com/>)
+
+### <a name="Other"></a> Other technologies
+
+* ESLint
+* Lodash
+* Google Maps
+
+## <a name="future"></a> Direction for future development
+
+Source code will be developed over time to handle bug fixes and incorporate new features
+
+The following is a list of potential enhancements for future code development.
+
+* Add functionality that allows a user to actually submit shelter intake form to shelter directly from the app.
+* Add additional forms of authentication like phone number, Facebook, Twitter, etc.
+* Add a resources page that provides contact information for various resources like food shelves, soup kitchens, mental health facilities, health clinics, etc.
+* Migrate app from Firebase to AWS.
+
+## <a name ="Issues"></a> Issues
+
+<p>If you find an issue while using the site or have a request, <a href="https://github.com/philipstubbs13/tcsw-sheltrus/issues/" target="_blank">log the issue or request here</a>. These issues will be addressed in a future code update.</p>
