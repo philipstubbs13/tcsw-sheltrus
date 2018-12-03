@@ -11,6 +11,7 @@ This project hopes to solve and slow down the rapidly growing homeless crisis in
 * [Live](#live)
 * [Screenshots](#screenshots)
 * [About this project](#about-this-project)
+  * [Photos from Twin Cities Startup Weekend](#photos)
   * [Business pitch](#pitch)
   * [How the app is built](#how-the-app-is-built)
   * [App workflow](#workflow)
@@ -86,6 +87,16 @@ Whether you are a business person who has an idea for a startup or are a develop
 For me, I participated in this event as the lead developer on my team and was the one primarily responsible for building the prototype of the app. Because of the time constraint to get something built for demo purposes, I built the prototype using React. React is a JavaScript user interface framework that Facebook developed for the purposes of building component-based applications. Using React made it very easy to get a working demo app in less than 12 hours.
 
 At the conclusion of startup weekend, our team and app idea ended up winning 1st place. If you have any questions or comments regarding my experience at startup weekend or regarding the app I built, feel free to send me an email at philipstubbs13@gmail.com. As a side note, I'm also looking for developers to help me fully develop and build out the app. So, if you are a developer still reading this and are interested in contributing to this project, please reach out.
+
+### <a name="photos"></a> Photos from Twin Cities Startup Weekend 2018
+
+<img src="./readme_images/firstplace.jpg">
+
+<img src="./readme_images/whiteboard.jpg">
+
+<img src="./readme_images/workspace.jpg">
+
+<img src="./readme_images/event.jpg">
 
 ### <a name="pitch"></a> Business pitch
 
@@ -241,7 +252,7 @@ After you install the client dependencies, change directory to the project root 
 
 <p>After the development server has started, a Chrome browser window should open, and you should see the app. If the browser does not automatically open after the server starts, you can verify that the app is working locally on your computer by opening Chrome and going to <a href="http://localhost:3000">http://localhost:3000</a>. Note that by default, the development server will try to start up on port 3000. If port 3000 is already in use on your computer, then the development server will use a different port.
 
-<p>Tip: if you are having difficulty starting the React development server, try creating a <b>.env</b> inside of the <b>client</b> directory.</p>
+<p><b>Tip</b>: if you are having difficulty starting the React development server, try creating a <b>.env</b> inside of the <b>client</b> directory.</p>
 
 <p>Inside of the <b>.env</b> file, add the following line. Don't forget to also add the <b>.env</b> file to your <b>.gitignore</b> file so that it is not pushed to GitHub when code is committed.</p>
 
